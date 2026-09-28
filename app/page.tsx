@@ -40,7 +40,7 @@ export default function Home() {
       </nav>
 
       <main className="h-[calc(100dvh-4rem)] overflow-hidden flex-nowrap items-end p-[.8rem] relative z-10">
-          <InfiniteScrollGallery images={[krille, tjej, buildings, abbe, krille, tjej, buildings, abbe]} />
+          <InfiniteScrollGallery images={[krille, tjej, abbe, '/videos/leonheadergif.mp4', buildings]} />
       </main>
     </div>
   );

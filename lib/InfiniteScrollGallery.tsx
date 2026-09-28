@@ -4,8 +4,10 @@ import { useRef, useLayoutEffect } from 'react';
 import Image, { StaticImageData } from 'next/image';
 import gsap from 'gsap';
 
+type MediaItem = StaticImageData | string;
+
 interface InfiniteScrollGalleryProps {
-  images: StaticImageData[];
+  images: MediaItem[];
 }
 
 export default function InfiniteScrollGallery({ images }: InfiniteScrollGalleryProps) {
@@ -55,19 +57,35 @@ export default function InfiniteScrollGallery({ images }: InfiniteScrollGalleryP
   return (
     <div ref={containerRef} className="h-full overflow-hidden">
       <div ref={wrapperRef} className="flex gap-[.8rem] h-full">
-        {displayImages.map((img, index) => (
-          <a key={index} href="/" className="shrink-0 w-[calc(28.74vw-.8rem)]">
-            <div className="relative h-full overflow-hidden">
-              <Image
-                src={img}
-                alt=""
-                fill
-                className="object-cover"
-                sizes="30vw"
-              />
-            </div>
-          </a>
-        ))}
+        {displayImages.map((item, index) => {
+          const isVideo = typeof item === 'string' && item.endsWith('.mp4');
+
+          return (
+            <a key={index} href="/" className="shrink-0 w-[calc(28.74vw-.8rem)]">
+              <div className="relative h-full overflow-hidden">
+                {isVideo ? (
+                  <video
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="absolute inset-0 w-full h-full grayscale object-cover"
+                  >
+                    <source src={item as string} type="video/mp4" />
+                  </video>
+                ) : (
+                  <Image
+                    src={item as StaticImageData}
+                    alt=""
+                    fill
+                    className="object-cover"
+                    sizes="30vw"
+                  />
+                )}
+              </div>
+            </a>
+          );
+        })}
       </div>
     </div>
   );
