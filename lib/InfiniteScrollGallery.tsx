@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useLayoutEffect } from "react";
+import { useRef, useLayoutEffect, useState } from "react";
 import Image, { StaticImageData } from "next/image";
 
 type MediaItem = StaticImageData | string;
@@ -9,11 +9,14 @@ interface InfiniteScrollGalleryProps {
   images: MediaItem[];
 }
 
+const pageLabels = ["info", "roster", "projects", "contact", "archive"];
+
 export default function InfiniteScrollGallery({
   images,
 }: InfiniteScrollGalleryProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
+  const [hoveredLabel, setHoveredLabel] = useState<string | null>(null);
 
   useLayoutEffect(() => {
     const container = containerRef.current;
@@ -23,7 +26,7 @@ export default function InfiniteScrollGallery({
     let scrollPosition = 0;
     let velocity = 0;
     const scrollSpeed = 0.1;
-    const friction = 0.95; // Higher = more momentum (0.85-0.98 range)
+    const friction = 0.95;
     let cachedTotalWidth = 0;
     let rafId: number;
 
@@ -84,8 +87,15 @@ export default function InfiniteScrollGallery({
   return (
     <div
       ref={containerRef}
-      className="h-dvh border-2 border-red-500 flex-nowrap items-end p-[.8rem] relative z-10"
+      className="h-dvh flex-nowrap items-end p-[.8rem] relative"
     >
+      {/* Hover label overlay */}
+      {hoveredLabel && (
+        <div className="fixed inset-0 pointer-events-none flex z-50 items-center justify-end pr-[3.2rem]">
+          <h2 className="font-chillax text-[12vw] font-semibold text-[#1F1E1E] -translate-y-26 lowercase">{hoveredLabel}</h2>
+        </div>
+      )}
+
       <div
         ref={wrapperRef}
         className="flex gap-[.8rem] h-full items-end"
@@ -93,12 +103,15 @@ export default function InfiniteScrollGallery({
       >
         {displayImages.map((item, index) => {
           const isVideo = typeof item === "string" && item.endsWith(".mp4");
+          const label = pageLabels[index % pageLabels.length];
 
           return (
             <a
               key={index}
               href="/"
               className="shrink-0 w-[calc(28.74vw-.8rem)]"
+              onMouseEnter={() => setHoveredLabel(label)}
+              onMouseLeave={() => setHoveredLabel(null)}
             >
               <div className="relative h-100 overflow-hidden">
                 {isVideo ? (

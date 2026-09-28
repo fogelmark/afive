@@ -11,7 +11,38 @@ export const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const centralStation = localFont({
-  src: "../public/fonts/Central Station.ttf",
-  variable: "--font-central-station",
+export const chillax = localFont({
+  src: [
+    {
+      path: "../public/fonts/Chillax-Extralight.woff2",
+      weight: "200",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/Chillax-Light.woff2",
+      weight: "300",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/Chillax-Regular.woff2",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/Chillax-Medium.woff2",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/Chillax-Semibold.woff2",
+      weight: "600",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/Chillax-Bold.woff2",
+      weight: "700",
+      style: "normal",
+    },
+  ],
+  variable: "--font-chillax",
 });

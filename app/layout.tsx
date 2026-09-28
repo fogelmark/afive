@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { geistSans, geistMono, centralStation } from "@/lib/fonts";
+import { geistSans, geistMono, chillax } from "@/lib/fonts";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -15,7 +15,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${centralStation.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${chillax.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
