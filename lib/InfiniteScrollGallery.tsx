@@ -94,7 +94,7 @@ export default function InfiniteScrollGallery({
       {/* Hover label overlay */}
       {hoveredLabel && (
         <div className="fixed inset-0 pointer-events-none flex z-50 items-center justify-end pr-[3.2rem]">
-          <h2 className="font-chillax text-[12vw] font-semibold text-[#1F1E1E] -translate-y-26 lowercase">
+          <h2 className="font-chillax text-[12vw] font-semibold text-[hsl(40,1%,35%)] -translate-y-26 lowercase">
             {hoveredLabel}
           </h2>
         </div>
@@ -136,12 +136,15 @@ export default function InfiniteScrollGallery({
                 <motion.div
                   className="absolute inset-0 bg-black z-10 pointer-events-none"
                   animate={{
-                    opacity: hoveredIndex !== null && hoveredIndex !== index ? 0.5 : 0,
+                    opacity: hoveredIndex !== null && hoveredIndex !== index ? 0.6 : 0,
                   }}
                   transition={{ duration: 0.6, ease: "easeOut" }}
                 />
                 <motion.div
                   className="size-full"
+                  // animate={{
+                  //   filter: hoveredIndex !== null && hoveredIndex !== index ? "blur(2px)" : "blur(0px)",
+                  // }}
                   whileHover={{ scale: 1.05 }}
                   transition={{ duration: 0.6, ease: "easeOut" }}
                 >

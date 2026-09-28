@@ -9,7 +9,7 @@ import InfiniteScrollGallery from "@/lib/InfiniteScrollGallery";
 
 export default function Home() {
   return (
-    <div className="bg-[#f1eee9]">
+    <div className="bg-[#E7E2DA]">
       <nav className="px-6 md:px-12 py-6 fixed top-0 left-0 w-full flex justify-between items-center z-20">
         <div className="relative w-12 h-12">
           <Image
