@@ -2,6 +2,7 @@
 
 import { useRef, useLayoutEffect, useState } from "react";
 import Image, { StaticImageData } from "next/image";
+import { motion } from "framer-motion";
 
 type MediaItem = StaticImageData | string;
 
@@ -17,6 +18,7 @@ export default function InfiniteScrollGallery({
   const containerRef = useRef<HTMLDivElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [hoveredLabel, setHoveredLabel] = useState<string | null>(null);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   useLayoutEffect(() => {
     const container = containerRef.current;
@@ -92,7 +94,9 @@ export default function InfiniteScrollGallery({
       {/* Hover label overlay */}
       {hoveredLabel && (
         <div className="fixed inset-0 pointer-events-none flex z-50 items-center justify-end pr-[3.2rem]">
-          <h2 className="font-chillax text-[12vw] font-semibold text-[#1F1E1E] -translate-y-26 lowercase">{hoveredLabel}</h2>
+          <h2 className="font-chillax text-[12vw] font-semibold text-[#1F1E1E] -translate-y-26 lowercase">
+            {hoveredLabel}
+          </h2>
         </div>
       )}
 
@@ -106,35 +110,63 @@ export default function InfiniteScrollGallery({
           const label = pageLabels[index % pageLabels.length];
 
           return (
-            <a
+            <motion.a
               key={index}
               href="/"
               className="shrink-0 w-[calc(28.74vw-.8rem)]"
-              onMouseEnter={() => setHoveredLabel(label)}
-              onMouseLeave={() => setHoveredLabel(null)}
+              animate={{
+                marginLeft: hoveredIndex === index ? ".8rem" : "0rem",
+                marginRight: hoveredIndex === index ? ".8rem" : "0rem",
+
+              }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              onMouseEnter={() => {
+                setHoveredLabel(label);
+                setHoveredIndex(index);
+              }}
+              onMouseLeave={() => {
+                setHoveredLabel(null);
+                setHoveredIndex(null);
+              }}
             >
-              <div className="relative h-100 overflow-hidden">
-                {isVideo ? (
-                  <video
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    className="grayscale size-full object-cover"
-                  >
-                    <source src={item as string} type="video/mp4" />
-                  </video>
-                ) : (
-                  <Image
-                    src={item as StaticImageData}
-                    alt=""
-                    fill
-                    className="object-cover object-top size-full"
-                    sizes="30vw"
-                  />
-                )}
-              </div>
-            </a>
+              <motion.div
+                className="relative h-100 overflow-hidden"
+              >
+                {/* Dark overlay for non-hovered images */}
+                <motion.div
+                  className="absolute inset-0 bg-black z-10 pointer-events-none"
+                  animate={{
+                    opacity: hoveredIndex !== null && hoveredIndex !== index ? 0.5 : 0,
+                  }}
+                  transition={{ duration: 0.6, ease: "easeOut" }}
+                />
+                <motion.div
+                  className="size-full"
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.6, ease: "easeOut" }}
+                >
+                  {isVideo ? (
+                    <video
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      className="grayscale size-full object-cover"
+                    >
+                      <source src={item as string} type="video/mp4" />
+                    </video>
+                  ) : (
+                    <Image
+                      src={item as StaticImageData}
+                      alt=""
+                      fill
+                      className="object-cover object-top size-full"
+                      sizes="30vw"
+                    />
+                  )}
+                </motion.div>
+              </motion.div>
+            </motion.a>
           );
         })}
       </div>
