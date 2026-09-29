@@ -4,7 +4,7 @@ import krille from "@/public/images/krille.jpg";
 import abbe from "@/public/images/abbe.jpg";
 import tjej from "@/public/images/tjej.jpg";
 import buildings from "@/public/images/buildings.jpg";
-import InfiniteScrollGallery from "@/lib/InfiniteScrollGallery";
+import InfiniteScrollGallery from "@/app/components/InfiniteScrollGallery";
 // import lotta from "@/public/videos/leonheadergif.mp4"
 
 export default function Home() {
