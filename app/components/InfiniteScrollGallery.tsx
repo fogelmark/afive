@@ -108,12 +108,8 @@ export default function InfiniteScrollGallery({
             const label = pageLabels[index % pageLabels.length];
 
             return (
-              <a
-                key={index}
-                href="/"
-                className="w-full"
-              >
-                <div className="relative aspect-[3/4] overflow-hidden">
+              <a key={index} href="/" className="w-full">
+                <div className="relative aspect-3/4 overflow-hidden">
                   {isVideo ? (
                     <video
                       autoPlay
@@ -137,7 +133,7 @@ export default function InfiniteScrollGallery({
                   )}
                   {/* Mobile label overlay */}
                   <div className="absolute bottom-4 right-4">
-                    <h3 className="font-chillax text-4xl font-semibold text-[hsl(40,71%,45%)] lowercase drop-shadow-lg">
+                    <h3 className="font-chillax text-4xl font-semibold text-[hsl(40,64%,50%)] lowercase drop-shadow-lg">
                       {label}
                     </h3>
                   </div>
@@ -152,17 +148,12 @@ export default function InfiniteScrollGallery({
 
   // Desktop: horizontal infinite scroll
   return (
-    <div
-      ref={containerRef}
-      className="h-[calc(100vh-6rem)] p-[.8rem] relative"
-    >
-      {/* Hover label overlay */}
+    <div ref={containerRef} className="h-[calc(100vh-6rem)] p-[.8rem] relative">
       {hoveredLabel && (
-        <div className="fixed inset-0 pointer-events-none flex z-50 items-center justify-end pr-[3.2rem]">
+        <div className="absolute bottom-94 2xl:bottom-120 right-[3.2rem] pointer-events-none z-50">
           <motion.h2
             key={hoveredLabel}
-            // className="font-chillax text-[12vw] font-semibold text-[hsl(40,1%,40%)] -translate-y-40 lowercase"
-            className="font-chillax text-[12vw] font-semibold text-[hsl(40,71%,45%)] -translate-y-40 lowercase"
+            className="font-chillax text-[170px] font-semibold text-[hsl(40,71%,45%)] lowercase"
             initial={{ opacity: 0, filter: "blur(4px)" }}
             animate={{ opacity: 1, filter: "blur(0px)" }}
             transition={{ duration: 0.3, ease: "easeOut" }}
@@ -185,7 +176,7 @@ export default function InfiniteScrollGallery({
             <motion.a
               key={index}
               href="/"
-              className="shrink-0 w-full md:w-[calc(28.74vw-.8rem)]"
+              className="shrink-0 relative w-full md:w-[calc(28.74vw-.8rem)]"
               animate={{
                 marginLeft: hoveredIndex === index ? ".8rem" : "0rem",
                 marginRight: hoveredIndex === index ? ".8rem" : "0rem",
@@ -200,7 +191,7 @@ export default function InfiniteScrollGallery({
                 setHoveredIndex(null);
               }}
             >
-              <motion.div className="relative h-115 overflow-hidden">
+              <motion.div className="relative h-[66vh] overflow-hidden">
                 <motion.div
                   className="size-full relative"
                   whileHover={{ scale: 1.05 }}

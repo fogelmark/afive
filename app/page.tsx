@@ -19,6 +19,7 @@ export default function Home() {
         <div className="relative w-12 h-12">
           <Image src={logo_dark} alt="A5" className="object-contain" priority />
         </div>
+        <p className="text-xs uppercase text-[#131313]">nav</p>
         <div className="flex gap-6 font-satoshi font-medium md:gap-10 text-xs text-[#131313]">
           <a
             href="#"
