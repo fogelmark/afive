@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useLayoutEffect, useState } from "react";
+import { useRef, useLayoutEffect, useState, useEffect } from "react";
 import Image, { StaticImageData } from "next/image";
 import { motion } from "framer-motion";
 
@@ -10,7 +10,7 @@ interface InfiniteScrollGalleryProps {
   images: MediaItem[];
 }
 
-const pageLabels = ["info", "roster", "projects", "contact", "archive"];
+const pageLabels = ["info", "roster", "label", "contact", "archive"];
 
 export default function InfiniteScrollGallery({
   images,
@@ -19,11 +19,23 @@ export default function InfiniteScrollGallery({
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [hoveredLabel, setHoveredLabel] = useState<string | null>(null);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   useLayoutEffect(() => {
     const container = containerRef.current;
     const wrapper = wrapperRef.current;
-    if (!container || !wrapper) return;
+    if (!container || !wrapper || isMobile) return;
 
     let scrollPosition = 0;
     let velocity = 0;
@@ -82,21 +94,75 @@ export default function InfiniteScrollGallery({
       window.removeEventListener("resize", handleResize);
       cancelAnimationFrame(rafId);
     };
-  }, [images.length]);
+  }, [images.length, isMobile]);
 
-  const displayImages = [...images, ...images, ...images];
+  const displayImages = isMobile ? images : [...images, ...images, ...images];
 
+  if (isMobile) {
+    // Mobile: vertical scrollable grid
+    return (
+      <div className="p-[.8rem] pb-[3.2rem] min-h-[calc(100vh-6rem)]">
+        <div className="flex flex-col gap-[.8rem]">
+          {displayImages.map((item, index) => {
+            const isVideo = typeof item === "string" && item.endsWith(".mp4");
+            const label = pageLabels[index % pageLabels.length];
+
+            return (
+              <a
+                key={index}
+                href="/"
+                className="w-full"
+              >
+                <div className="relative aspect-[3/4] overflow-hidden">
+                  {isVideo ? (
+                    <video
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      className="grayscale size-full object-cover"
+                    >
+                      <source src={item as string} type="video/mp4" />
+                    </video>
+                  ) : (
+                    <Image
+                      src={item as StaticImageData}
+                      alt={label}
+                      fill
+                      className="object-cover object-top size-full"
+                      sizes="(max-width: 768px) 100vw, 30vw"
+                      quality={95}
+                      priority={index === 0}
+                    />
+                  )}
+                  {/* Mobile label overlay */}
+                  <div className="absolute bottom-4 right-4">
+                    <h3 className="font-chillax text-4xl font-semibold text-[hsl(40,71%,45%)] lowercase drop-shadow-lg">
+                      {label}
+                    </h3>
+                  </div>
+                </div>
+              </a>
+            );
+          })}
+        </div>
+      </div>
+    );
+  }
+
+  // Desktop: horizontal infinite scroll
   return (
     <div
       ref={containerRef}
-      className="h-[calc(100vh-6rem)] flex-nowrap items-end p-[.8rem] relative"
+      className="h-[calc(100vh-6rem)] p-[.8rem] relative"
     >
       {/* Hover label overlay */}
       {hoveredLabel && (
         <div className="fixed inset-0 pointer-events-none flex z-50 items-center justify-end pr-[3.2rem]">
           <motion.h2
             key={hoveredLabel}
-            className="font-chillax text-[12vw] font-semibold text-[hsl(40,1%,40%)] -translate-y-26 lowercase"
+            // className="font-chillax text-[12vw] font-semibold text-[hsl(40,1%,40%)] -translate-y-40 lowercase"
+            className="font-chillax text-[12vw] font-semibold text-[hsl(40,71%,45%)] -translate-y-40 lowercase"
             initial={{ opacity: 0, filter: "blur(4px)" }}
             animate={{ opacity: 1, filter: "blur(0px)" }}
             transition={{ duration: 0.3, ease: "easeOut" }}
@@ -119,7 +185,7 @@ export default function InfiniteScrollGallery({
             <motion.a
               key={index}
               href="/"
-              className="shrink-0 w-[calc(28.74vw-.8rem)]"
+              className="shrink-0 w-full md:w-[calc(28.74vw-.8rem)]"
               animate={{
                 marginLeft: hoveredIndex === index ? ".8rem" : "0rem",
                 marginRight: hoveredIndex === index ? ".8rem" : "0rem",
@@ -134,12 +200,12 @@ export default function InfiniteScrollGallery({
                 setHoveredIndex(null);
               }}
             >
-              <motion.div className="relative h-100 overflow-hidden">
-                  <motion.div
-                    className="size-full"
-                    whileHover={{ scale: 1.05 }}
-                    transition={{ duration: 0.6, ease: "easeOut" }}
-                  >
+              <motion.div className="relative h-115 overflow-hidden">
+                <motion.div
+                  className="size-full relative"
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.6, ease: "easeOut" }}
+                >
                   {isVideo ? (
                     <video
                       autoPlay

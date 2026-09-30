@@ -5,6 +5,7 @@ import { motion, useSpring } from "framer-motion";
 
 export default function CustomCursor() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [isMobile, setIsMobile] = useState(false);
 
   const cursorX = useSpring(0, { damping: 30, stiffness: 200 });
   const cursorY = useSpring(0, { damping: 30, stiffness: 200 });
@@ -13,6 +14,13 @@ export default function CustomCursor() {
   const shadowY = useSpring(0, { damping: 20, stiffness: 100 });
 
   useEffect(() => {
+    // Check if device is touch-enabled
+    const checkMobile = () => {
+      setIsMobile('ontouchstart' in window || navigator.maxTouchPoints > 0);
+    };
+
+    checkMobile();
+
     const handleMouseMove = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
@@ -30,6 +38,9 @@ export default function CustomCursor() {
     shadowX.set(mousePosition.x);
     shadowY.set(mousePosition.y);
   }, [mousePosition, cursorX, cursorY, shadowX, shadowY]);
+
+  // Don't render custom cursor on mobile/touch devices
+  if (isMobile) return null;
 
   return (
     <>
