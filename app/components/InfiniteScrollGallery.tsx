@@ -153,7 +153,8 @@ export default function InfiniteScrollGallery({
         <div className="absolute bottom-94 2xl:bottom-120 right-[3.2rem] pointer-events-none z-50">
           <motion.h2
             key={hoveredLabel}
-            className="font-chillax text-[170px] font-semibold text-[hsl(40,71%,45%)] lowercase"
+            // className="font-chillax text-[170px] font-semibold text-[hsl(40,71%,45%)] lowercase"
+            className="font-chillax text-[170px] font-semibold text-[#3c3c3c] lowercase"
             initial={{ opacity: 0, filter: "blur(4px)" }}
             animate={{ opacity: 1, filter: "blur(0px)" }}
             transition={{ duration: 0.3, ease: "easeOut" }}

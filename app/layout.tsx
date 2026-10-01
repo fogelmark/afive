@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { geistSans, geistMono, chillax, satoshi } from "@/lib/fonts";
+import { geistSans, geistMono, chillax, satoshi, generalSans } from "@/lib/fonts";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -15,7 +15,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${chillax.variable} ${satoshi.variable} antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${chillax.variable} ${satoshi.variable} ${generalSans.variable} antialiased`}
     >
       <body>{children}</body>
     </html>

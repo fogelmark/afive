@@ -22,6 +22,7 @@
 @theme {
   --font-chillax: "Chillax", sans-serif;
   --font-satoshi: "Satoshi", sans-serif;
+  --font-general-sans: "GeneralSans", sans-serif;
 }
 
 html {
