@@ -1,10 +1,18 @@
 import type { Metadata } from "next";
-import { geistSans, geistMono, chillax, satoshi, generalSans } from "@/lib/fonts";
+import {
+  geistSans,
+  geistMono,
+  chillax,
+  satoshi,
+  generalSans,
+} from "@/lib/fonts";
 import "./globals.css";
+import Header from "./components/header";
 
 export const metadata: Metadata = {
   title: "A5 Music Publishing",
-  description: "Discover extraordinary musical compositions that push boundaries and create timeless moments.",
+  description:
+    "Discover extraordinary musical compositions that push boundaries and create timeless moments.",
 };
 
 export default function RootLayout({
@@ -17,7 +25,10 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} ${chillax.variable} ${satoshi.variable} ${generalSans.variable} antialiased`}
     >
-      <body>{children}</body>
+      <body>
+        <Header />
+        {children}
+      </body>
     </html>
   );
 }

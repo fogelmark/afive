@@ -1,33 +1,33 @@
 /* eslint-disable */
 
-import { cn } from "@/lib/utils"
-import { motion } from "motion/react"
-import { useState } from "react"
+import { cn } from "@/lib/utils";
+import { motion } from "motion/react";
+import { useState } from "react";
 
 interface ButtonProps {
-  children: string
-  className?: string
-  href?: string
+  children: string;
+  className?: string;
+  href?: string;
 }
 
 export const ButtonFlip = ({ children, className, href }: ButtonProps) => {
-  const [hoverCount, setHoverCount] = useState(0)
-  const [animating, setAnimating] = useState(false)
+  const [hoverCount, setHoverCount] = useState(0);
+  const [animating, setAnimating] = useState(false);
 
   const handleHover = () => {
-    if (animating) return
-    setAnimating(true)
-    setHoverCount((prev) => prev + 1)
+    if (animating) return;
+    setAnimating(true);
+    setHoverCount((prev) => prev + 1);
 
     setTimeout(() => {
-      setAnimating(false)
-    }, 300)
-  }
+      setAnimating(false);
+    }, 300);
+  };
 
   const wrapper = cn(
     "relative flex w-fit cursor-pointer items-center justify-center text-2xl font-semibold uppercase overflow-hidden border-b-2 border-transparent focus:outline-none focus-visible:border-b-2 focus-visible:border-leon-yellow",
     className,
-  )
+  );
 
   const inner = (
     <span className="relative block h-[1em] leading-none">
@@ -51,10 +51,9 @@ export const ButtonFlip = ({ children, className, href }: ButtonProps) => {
         {children}
       </motion.span>
     </span>
-  )
+  );
 
-  return href ? (
-    // <div className="relative p-2">
+  return (
     <a
       className={wrapper}
       href={href}
@@ -64,18 +63,5 @@ export const ButtonFlip = ({ children, className, href }: ButtonProps) => {
     >
       {inner}
     </a>
-  ) : (
-    // </div>
-    <div className="relative w-fit">
-    <span
-      className={wrapper}
-      role="button"
-      tabIndex={0}
-      onMouseEnter={handleHover}
-    >
-      {inner}
-    </span>
-    <span className="absolute top-0 -right-22 pointer-events-none text-secondary-gray/70 uppercase text-[10px] font-medium">coming soon</span>
-    </div>
-  )
-}
+  );
+};

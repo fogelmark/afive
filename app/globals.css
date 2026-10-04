@@ -23,6 +23,7 @@
   --font-chillax: "Chillax", sans-serif;
   --font-satoshi: "Satoshi", sans-serif;
   --font-general-sans: "GeneralSans", sans-serif;
+  /* --color-: "#F1EEE9"; */
 }
 
 html {
@@ -42,6 +43,7 @@ body {
   height: 100%;
   width: 100%;
   position: relative;
+  background-color: #F1EEE9;
 }
 
 @media (pointer: coarse) {

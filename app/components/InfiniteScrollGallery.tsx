@@ -148,7 +148,7 @@ export default function InfiniteScrollGallery({
 
   // Desktop: horizontal infinite scroll
   return (
-    <div ref={containerRef} className="h-[calc(100vh-6rem)] p-[.8rem] relative">
+    <div ref={containerRef} className="h-[calc(100vh-5rem)] p-[.8rem] relative">
       {hoveredLabel && (
         <div className="absolute bottom-94 2xl:bottom-120 right-[3.2rem] pointer-events-none z-50">
           <motion.h2
