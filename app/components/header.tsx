@@ -34,23 +34,23 @@ const menuItems = [
 
 const socialLinks = [
   {
-    href: "https://music.apple.com/se/artist/l%C3%A9on/1065692205?l=en-GB",
+    href: "/",
     label: "Open Apple Music (opens in a new tab)",
     Icon: SiApplemusic,
   },
   {
-    href: "https://www.instagram.com/leon/",
+    href: "/",
     label: "Open Instagram (opens in a new tab)",
     Icon: FaInstagram,
   },
   {
-    href: "https://open.spotify.com/artist/4SqTiwOEdYrNayaGMkc7ia?si=U1ig4JftQm-kCDbByBkTCA",
+    href: "/",
     label: "Open Spotify (opens in a new tab)",
 
     Icon: FaSpotify,
   },
   {
-    href: "https://www.youtube.com/@itsleonmusic",
+    href: "/",
     label: "Open YouTube (opens in a new tab)",
     Icon: FaYoutube,
   },
@@ -132,7 +132,7 @@ export default function Header() {
         <div className="flex items-start justify-center gap-4">
           {socialLinks.map(({ href, label, Icon: IconComp }) => (
             <a
-              key={href}
+              key={label}
               href={href}
               target="_blank"
               rel="noopener noreferrer"
@@ -148,22 +148,9 @@ export default function Header() {
           ))}
         </div>
       </motion.aside>
-
-      {/* <div className="relative w-24 col-start-6 col-span-2">
-        <Image
-          src={logo_dark_stripes}
-          alt="A5"
-          className="object-contain"
-          priority
-        />
-      </div> */}
       <div className="relative w-24 col-start-6 col-span-2">
         <p className="font-bespoke text-xl text-[#3c3c3c] font-bold">AFIVE</p>
       </div>
-
-      {/* <p className="text-xs uppercase col-start-9 col-span-4 text-[#131313] font-general-sans">
-        music publishing
-      </p> */}
     </nav>
   );
 }
