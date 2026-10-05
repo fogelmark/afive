@@ -13,7 +13,7 @@ import PreloaderLogo from "./components/PreloaderLogo";
 export default function Home() {
   return (
     <div className="max-h-screen">
-      <PreloaderLogo>
+      {/* <PreloaderLogo> */}
         {/* <Preloader> */}
         <Header />
         <CustomCursor />
@@ -21,7 +21,7 @@ export default function Home() {
           images={[krille, tjej, "/videos/leonheadergif.mp4", abbe, buildings]}
         />
         {/* </Preloader> */}
-      </PreloaderLogo>
+      {/* </PreloaderLogo> */}
     </div>
   );
 }

@@ -166,8 +166,10 @@ export default function InfiniteScrollGallery({
               href="/"
               className="shrink-0 relative w-full md:w-[calc(28.74vw-.8rem)]"
               animate={{
-                marginLeft: hoveredIndex === index ? ".8rem" : "0rem",
-                marginRight: hoveredIndex === index ? ".8rem" : "0rem",
+                x:
+                  hoveredIndex !== null && index < hoveredIndex ? "-.8rem" :
+                  hoveredIndex !== null && index > hoveredIndex ? ".8rem" :
+                  "0rem",
               }}
               transition={{ duration: 0.6, ease: "easeOut" }}
               onMouseEnter={() => {
