@@ -3,6 +3,7 @@
 import { useRef, useLayoutEffect, useState, useEffect } from "react";
 import Image, { StaticImageData } from "next/image";
 import { motion } from "framer-motion";
+import { ButtonFlip } from "./button-flip";
 
 type MediaItem = StaticImageData | string;
 
@@ -20,6 +21,7 @@ export default function InfiniteScrollGallery({
   const [hoveredLabel, setHoveredLabel] = useState<string | null>(null);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [isMobile, setIsMobile] = useState(false);
+  const [triggerFlip, setTriggerFlip] = useState<number | null>(null);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -149,21 +151,6 @@ export default function InfiniteScrollGallery({
   // Desktop: horizontal infinite scroll
   return (
     <div ref={containerRef} className="h-[calc(100vh-5rem)] p-[.8rem] relative">
-      {hoveredLabel && (
-        <div className="absolute bottom-94 2xl:bottom-120 right-[3.2rem] pointer-events-none z-50">
-          <motion.h2
-            key={hoveredLabel}
-            // className="font-chillax text-[170px] font-semibold text-[hsl(40,71%,45%)] lowercase"
-            className="font-general-sans text-[170px] font-semibold text-[#3c3c3c] lowercase"
-            initial={{ opacity: 0, filter: "blur(4px)" }}
-            animate={{ opacity: 1, filter: "blur(0px)" }}
-            transition={{ duration: 0.3, ease: "easeOut" }}
-          >
-            {hoveredLabel}
-          </motion.h2>
-        </div>
-      )}
-
       <div
         ref={wrapperRef}
         className="flex gap-[.8rem] h-full items-end"
@@ -186,6 +173,7 @@ export default function InfiniteScrollGallery({
               onMouseEnter={() => {
                 setHoveredLabel(label);
                 setHoveredIndex(index);
+                setTriggerFlip(index);
               }}
               onMouseLeave={() => {
                 setHoveredLabel(null);
@@ -218,6 +206,12 @@ export default function InfiniteScrollGallery({
                     />
                   )}
                 </motion.div>
+                {/* Desktop label overlay */}
+                <div className="absolute bottom-4 right-4 pointer-events-none">
+                  <h3 className="font-general-sans text-2xl font-medium text-offwhite uppercase drop-shadow-lg">
+                    {label}
+                  </h3>
+                </div>
               </motion.div>
             </motion.a>
           );

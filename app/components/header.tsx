@@ -26,7 +26,7 @@ export const drawerVariants = {
 
 const menuItems = [
   { text: "listen", href: "" },
-  { text: "watch", hre: "" },
+  { text: "watch", href: "" },
   { text: "shop", href: "" },
   { text: "tour", href: "" },
   { text: "news", href: "" },
@@ -115,9 +115,16 @@ export default function Header() {
         <ul className={cn("flex h-2/3 flex-col justify-center gap-4")}>
           {menuItems.map((item, index) => (
             <motion.li key={index}>
-              <ButtonFlip className="md:text-6xl text-5xl" href={item.href}>
-                {item.text}
-              </ButtonFlip>
+              <a
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="border-b-2 border-transparent focus:outline-none focus-visible:border-b-2 focus-visible:border-leon-yellow"
+              >
+                <ButtonFlip className="md:text-6xl text-5xl">
+                  {item.text}
+                </ButtonFlip>
+              </a>
             </motion.li>
           ))}
         </ul>
@@ -154,9 +161,9 @@ export default function Header() {
         <p className="font-bespoke text-xl text-[#3c3c3c] font-bold">AFIVE</p>
       </div>
 
-      <p className="text-xs uppercase col-start-9 col-span-4 text-[#131313] font-general-sans">
+      {/* <p className="text-xs uppercase col-start-9 col-span-4 text-[#131313] font-general-sans">
         music publishing
-      </p>
+      </p> */}
     </nav>
   );
 }
