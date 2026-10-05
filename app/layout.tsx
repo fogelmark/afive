@@ -5,6 +5,7 @@ import {
   chillax,
   satoshi,
   generalSans,
+  bespoke,
 } from "@/lib/fonts";
 import "./globals.css";
 import Header from "./components/header";
@@ -23,10 +24,10 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${chillax.variable} ${satoshi.variable} ${generalSans.variable} antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${chillax.variable} ${satoshi.variable} ${generalSans.variable} ${bespoke.variable} antialiased`}
     >
       <body>
-        <Header />
+        {/* <Header /> */}
         {children}
       </body>
     </html>

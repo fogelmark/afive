@@ -142,13 +142,16 @@ export default function Header() {
         </div>
       </motion.aside>
 
-      <div className="relative w-24 col-start-6 col-span-2">
+      {/* <div className="relative w-24 col-start-6 col-span-2">
         <Image
           src={logo_dark_stripes}
           alt="A5"
           className="object-contain"
           priority
         />
+      </div> */}
+      <div className="relative w-24 col-start-6 col-span-2">
+        <p className="font-bespoke text-xl text-[#3c3c3c] font-bold">AFIVE</p>
       </div>
 
       <p className="text-xs uppercase col-start-9 col-span-4 text-[#131313] font-general-sans">

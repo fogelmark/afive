@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
+  --background: #F1EEE9;
   --foreground: #171717;
 }
 
@@ -14,7 +14,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: #F1EEE9;
     --foreground: #ededed;
   }
 }
@@ -23,6 +23,9 @@
   --font-chillax: "Chillax", sans-serif;
   --font-satoshi: "Satoshi", sans-serif;
   --font-general-sans: "GeneralSans", sans-serif;
+  --font-galgo: "Galgo", sans-serif;
+  --font-anton: "Anton", sans-serif;
+  --font-bespoke: "BespokeSerif", serif;
   /* --color-: "#F1EEE9"; */
 }
 
