@@ -28,13 +28,13 @@ export const ButtonFlip = forwardRef<HTMLSpanElement, ButtonProps>(
     };
 
     const wrapper = cn(
-      "relative flex w-fit cursor-pointer items-center justify-center text-2xl font-semibold uppercase overflow-hidden",
+      "relative flex w-fit cursor-pointer items-center justify-center overflow-hidden",
       className,
     );
 
     return (
       <span ref={ref} className={wrapper} onMouseEnter={handleHover}>
-        <span className="relative block h-[1em] leading-none">
+        <span className="relative block">
           <motion.span
             key={hoverCount + "-white"}
             className="text-secondary-gray relative inline-block"

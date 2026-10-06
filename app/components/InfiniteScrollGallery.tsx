@@ -3,7 +3,7 @@
 import { useRef, useLayoutEffect, useState, useEffect } from "react";
 import Image, { StaticImageData } from "next/image";
 import { motion } from "framer-motion";
-import { ButtonFlip } from "./button-flip";
+import { TextFlip } from "./text-flip";
 
 type MediaItem = StaticImageData | string;
 
@@ -167,9 +167,11 @@ export default function InfiniteScrollGallery({
               className="shrink-0 relative w-full md:w-[calc(28.74vw-.8rem)]"
               animate={{
                 x:
-                  hoveredIndex !== null && index < hoveredIndex ? "-.8rem" :
-                  hoveredIndex !== null && index > hoveredIndex ? ".8rem" :
-                  "0rem",
+                  hoveredIndex !== null && index < hoveredIndex
+                    ? "-.8rem"
+                    : hoveredIndex !== null && index > hoveredIndex
+                      ? ".8rem"
+                      : "0rem",
               }}
               transition={{ duration: 0.6, ease: "easeOut" }}
               onMouseEnter={() => {
@@ -209,11 +211,20 @@ export default function InfiniteScrollGallery({
                   )}
                 </motion.div>
                 {/* Desktop label overlay */}
-                <div className="absolute bottom-1 right-3 pointer-events-none">
-                  <h3 className="font-new-title text-4xl font-medium text-offwhite uppercase drop-shadow-lg">
+                <motion.div
+                  className="absolute bottom-1 right-3 pointer-events-none"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{
+                    opacity: hoveredIndex === index ? 1 : 0,
+                    y: hoveredIndex === index ? 0 : 10,
+                    filter: hoveredIndex === index ? "blur(0px)" : "blur(4px)",
+                  }}
+                  transition={{ duration: 0.3, ease: "easeOut" }}
+                >
+                  <h3 className="font-satoshi text-4xl leading-none px-1 tracking-tighter font-medium text-offwhite capitalize drop-shadow-lg">
                     {label}
                   </h3>
-                </div>
+                </motion.div>
               </motion.div>
             </motion.a>
           );

@@ -112,7 +112,7 @@ export default function Header() {
           { hidden: !isOpen },
         )}
       >
-        <ul className={cn("flex h-2/3 flex-col justify-center gap-4")}>
+        <ul className={cn("flex h-2/3 flex-col justify-center gap-2")}>
           {menuItems.map((item, index) => (
             <motion.li key={index}>
               <a
@@ -121,7 +121,7 @@ export default function Header() {
                 rel="noopener noreferrer"
                 className="border-b-2 border-transparent focus:outline-none focus-visible:border-b-2 focus-visible:border-leon-yellow"
               >
-                <ButtonFlip className="md:text-6xl text-5xl">
+                <ButtonFlip className="md:text-7xl capitalize leading-none px-1 tracking-tighter font-satoshi font-medium text-5xl">
                   {item.text}
                 </ButtonFlip>
               </a>
