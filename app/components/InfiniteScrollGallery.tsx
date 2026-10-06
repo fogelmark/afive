@@ -209,8 +209,8 @@ export default function InfiniteScrollGallery({
                   )}
                 </motion.div>
                 {/* Desktop label overlay */}
-                <div className="absolute bottom-4 right-4 pointer-events-none">
-                  <h3 className="font-general-sans text-2xl font-medium text-offwhite uppercase drop-shadow-lg">
+                <div className="absolute bottom-1 right-3 pointer-events-none">
+                  <h3 className="font-new-title text-4xl font-medium text-offwhite uppercase drop-shadow-lg">
                     {label}
                   </h3>
                 </div>

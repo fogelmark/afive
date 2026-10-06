@@ -62,19 +62,20 @@ export default function Roster() {
         ref={container1}
         className="flex md:h-screen w-full items-center justify-center bg-[#f0efe9]"
       >
-        <div className="relative h-screen w-full overflow-hidden p-10">
+        <div className="relative h-screen w-full overflow-hidden p-0">
           <div className="relative flex size-full flex-col items-center justify-center overflow-hidden">
+            <div className="absolute inset-0 z-10 bg-linear-to-b from-transparent to-black/60" />
             <section className="absolute z-10 bottom-8 left-8 right-8">
-              <h2 className="font-bespoke text-5xl md:text-7xl font-bold text-[#F1EEE9] leading-none drop-shadow-lg">
+              <h2 className="font-new-title uppercase text-5xl md:text-[180px] font-bold text-[#F1EEE9] leading-none">
                 {roster[0].name}
               </h2>
-              <p className="font-general-sans text-xl md:text-2xl text-[#F1EEE9] mt-3 drop-shadow-lg">
+              <p className="font-general-sans text-xl md:text-2xl text-[#F1EEE9] mt-3">
                 {roster[0].role}
               </p>
             </section>
             <motion.img
               style={{ y: y1 }}
-              className="size-full scale-105 object-cover"
+              className="size-full scale-105 object-center object-cover"
               src={alicia.src}
               alt={roster[0].name}
             />
@@ -85,13 +86,14 @@ export default function Roster() {
         ref={container2}
         className="flex md:h-screen w-full items-center justify-center bg-[#f0efe9]"
       >
-        <div className="relative h-screen w-full overflow-hidden p-10">
+        <div className="relative h-full w-full overflow-hidden p-0">
           <div className="relative flex size-full flex-col items-center justify-center overflow-hidden">
+            <div className="absolute inset-0 z-10 bg-linear-to-b from-transparent to-black/60" />
             <section className="absolute z-10 bottom-8 left-8 right-8">
-              <h2 className="font-bespoke text-5xl md:text-7xl font-bold text-[#F1EEE9] leading-none drop-shadow-lg">
+              <h2 className="font-new-title uppercase text-5xl md:text-[180px] font-bold text-[#F1EEE9] leading-none">
                 {roster[1].name}
               </h2>
-              <p className="font-general-sans text-xl md:text-2xl text-[#F1EEE9] mt-3 drop-shadow-lg">
+              <p className="font-general-sans text-xl md:text-2xl text-[#F1EEE9] mt-3">
                 {roster[1].role}
               </p>
             </section>

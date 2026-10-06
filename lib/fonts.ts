@@ -209,3 +209,34 @@ export const bespoke = localFont({
   ],
   variable: "--font-bespoke",
 });
+
+export const newTitle = localFont({
+  src: [
+    {
+      path: "../public/fonts/NewTitle-Extralight.woff2",
+      weight: "200",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/NewTitle-Light.woff2",
+      weight: "300",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/NewTitle-Regular.woff2",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/NewTitle-Medium.woff2",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/NewTitle-Bold.woff2",
+      weight: "700",
+      style: "normal",
+    },
+  ],
+  variable: "--font-new-title",
+});
