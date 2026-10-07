@@ -6,6 +6,8 @@ import { cn } from "@/lib/utils";
 import { ButtonFlip } from "./button-flip";
 import { FaInstagram, FaSpotify, FaYoutube } from "react-icons/fa";
 import { SiApplemusic } from "react-icons/si";
+import Link from "next/link";
+import { TextFlip } from "./text-flip";
 
 export const drawerVariants = {
   open: {
@@ -23,11 +25,11 @@ export const drawerVariants = {
 };
 
 const menuItems = [
-  { text: "label", href: "" },
-  { text: "roster", href: "" },
-  { text: "news", href: "" },
-  { text: "archive", href: "" },
-  { text: "contact", href: "" },
+  { text: "label", href: "/label" },
+  { text: "roster", href: "/roster" },
+  { text: "news", href: "/news" },
+  { text: "archive", href: "/archive" },
+  { text: "contact", href: "/contact" },
 ];
 
 const socialLinks = [
@@ -124,16 +126,14 @@ export default function Header() {
         <ul className={cn("flex h-2/3 flex-col justify-center gap-2")}>
           {menuItems.map((item, index) => (
             <motion.li key={index}>
-              <a
+              <Link
                 href={item.href}
-                target="_blank"
-                rel="noopener noreferrer"
                 className="border-b-2 border-transparent focus:outline-none focus-visible:border-b-2 focus-visible:border-leon-yellow"
               >
                 <ButtonFlip className="md:text-7xl capitalize leading-none px-1 tracking-tighter font-satoshi font-medium text-5xl">
                   {item.text}
                 </ButtonFlip>
-              </a>
+              </Link>
             </motion.li>
           ))}
         </ul>
@@ -157,9 +157,11 @@ export default function Header() {
           ))}
         </div>
       </motion.aside>
-      <div className="relative w-24 col-start-6 col-span-2">
-        <p className="font-bespoke text-xl text-[#3c3c3c] font-bold">AFIVE</p>
-      </div>
+      <Link href="/" className="relative w-24 col-start-6 col-span-2">
+        <ButtonFlip className="font-bespoke text-xl uppercase text-[#3c3c3c] font-bold">
+          {"afive"}
+        </ButtonFlip>
+      </Link>
     </nav>
   );
 }

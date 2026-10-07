@@ -11,7 +11,8 @@ interface InfiniteScrollGalleryProps {
   images: MediaItem[];
 }
 
-const pageLabels = ["info", "roster", "label", "contact", "archive"];
+const pageLabels = ["label", "roster", "news", "archive", "contact"];
+const pageLinks = ["/label", "/roster", "/news", "/archive", "/contact"];
 
 export default function InfiniteScrollGallery({
   images,
@@ -108,9 +109,10 @@ export default function InfiniteScrollGallery({
           {displayImages.map((item, index) => {
             const isVideo = typeof item === "string" && item.endsWith(".mp4");
             const label = pageLabels[index % pageLabels.length];
+            const link = pageLinks[index % pageLinks.length];
 
             return (
-              <a key={index} href="/" className="w-full">
+              <a key={index} href={link} className="w-full">
                 <div className="relative aspect-3/4 overflow-hidden">
                   {isVideo ? (
                     <video
@@ -159,11 +161,12 @@ export default function InfiniteScrollGallery({
         {displayImages.map((item, index) => {
           const isVideo = typeof item === "string" && item.endsWith(".mp4");
           const label = pageLabels[index % pageLabels.length];
+          const link = pageLinks[index % pageLinks.length];
 
           return (
             <motion.a
               key={index}
-              href="/"
+              href={link}
               className="shrink-0 relative w-full md:w-[calc(28.74vw-.8rem)]"
               animate={{
                 x:
