@@ -157,7 +157,7 @@ export default function Header() {
           ))}
         </div>
       </motion.aside>
-      <Link href="/" className="relative w-24 col-start-6 col-span-2">
+      <Link href="/" className="relative w-24 col-start-7 md:col-start-6 col-span-2">
         <ButtonFlip className="font-bespoke text-xl uppercase text-[#3c3c3c] font-bold">
           {"afive"}
         </ButtonFlip>
