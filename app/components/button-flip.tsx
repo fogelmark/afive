@@ -28,7 +28,7 @@ export const ButtonFlip = forwardRef<HTMLSpanElement, ButtonProps>(
     };
 
     const wrapper = cn(
-      "relative flex w-fit cursor-pointer items-center justify-center overflow-hidden",
+      "relative flex w-fit cursor-pointer overflow-hidden items-start justify-center",
       className,
     );
 
@@ -39,7 +39,7 @@ export const ButtonFlip = forwardRef<HTMLSpanElement, ButtonProps>(
             key={hoverCount + "-white"}
             className="text-secondary-gray relative inline-block"
             initial={{ y: 0 }}
-            animate={{ y: "-100%" }}
+            animate={{ y: "-115%" }}
             transition={{ duration: 0.4, ease: [0.32, 0.72, 0, 1] }}
           >
             {children}
@@ -48,7 +48,7 @@ export const ButtonFlip = forwardRef<HTMLSpanElement, ButtonProps>(
           <motion.span
             key={hoverCount + "-red"}
             className="text-tertiary-gray absolute top-0 left-0"
-            initial={{ y: "100%" }}
+            initial={{ y: "115%" }}
             animate={{ y: 0 }}
             transition={{ duration: 0.4, ease: [0.32, 0.72, 0, 1] }}
           >

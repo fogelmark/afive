@@ -1,7 +1,5 @@
 "use client";
 
-import Image from "next/image";
-import logo_dark_stripes from "@/public/logos/afive-fi-stripes-dark.png";
 import { useState } from "react";
 import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
@@ -25,11 +23,11 @@ export const drawerVariants = {
 };
 
 const menuItems = [
-  { text: "listen", href: "" },
-  { text: "watch", href: "" },
-  { text: "shop", href: "" },
-  { text: "tour", href: "" },
+  { text: "label", href: "" },
+  { text: "roster", href: "" },
   { text: "news", href: "" },
+  { text: "archive", href: "" },
+  { text: "contact", href: "" },
 ];
 
 const socialLinks = [
@@ -63,42 +61,53 @@ export default function Header() {
     <nav className="px-6 md:px-12 py-6 grid grid-cols-12 items-center justify-items-center w-full z-20">
       <motion.div
         className={cn(
-          "relative z-40 flex w-fit justify-self-start col-start-1 col-span-2 gap-4 text-[#3c3c3c] max-sm:block",
+          "relative z-40 flex w-fit font-satoshi font-medium justify-self-start col-start-1 col-span-2 gap-4 text-[#3c3c3c] max-sm:block",
           {
             "text-[#F1EEE9]": isOpen,
           },
         )}
       >
-        <div
+        <motion.div
           aria-label={isOpen ? "Close menu" : "Open menu"}
           aria-expanded={isOpen}
           onClick={() => setIsOpen((v) => !v)}
           className="focus-visible:border-leon-yellow flex cursor-pointer items-center gap-2 focus:outline-none"
+          initial="closed"
+          animate={isOpen ? "open" : "closed"}
+          whileHover={isOpen ? undefined : "hover"}
         >
-          <div
+          <motion.div
             className={cn(
               "relative flex h-8 w-8 cursor-pointer items-center justify-center",
             )}
           >
             <motion.span
-              className="absolute top-1/2 left-1/2 h-px w-7.5 -translate-x-1/2 bg-current"
-              animate={isOpen ? { rotate: 45, y: 0 } : { rotate: 0, y: -4 }}
+              className="absolute top-1/2 left-1/2 h-px w-6 -translate-x-1/2 bg-current"
+              variants={{
+                open: { rotate: 45, y: 0 },
+                closed: { rotate: 0, y: -4 },
+                hover: { rotate: 0, y: -5 },
+              }}
               transition={{ duration: 0.15 }}
             />
             <motion.span
-              className="absolute top-1/2 left-1/2 h-px w-7.5 -translate-x-1/2 bg-current"
-              animate={isOpen ? { rotate: -45, y: 0 } : { rotate: 0, y: 4 }}
+              className="absolute top-1/2 left-1/2 h-px w-6 -translate-x-1/2 bg-current"
+              variants={{
+                open: { rotate: -45, y: 0 },
+                closed: { rotate: 0, y: 4 },
+                hover: { rotate: 0, y: 5 },
+              }}
               transition={{ duration: 0.15 }}
             />
-          </div>
+          </motion.div>
           <p
-            className={cn("uppercase text-xs", {
+            className={cn("uppercase text-sm", {
               "text-[#F1EEE9]": isOpen,
             })}
           >
             {isOpen ? "close" : "menu"}
           </p>
-        </div>
+        </motion.div>
       </motion.div>
 
       <motion.aside
@@ -108,7 +117,7 @@ export default function Header() {
         variants={drawerVariants}
         initial="closed"
         className={cn(
-          "bg-[#3c3c3c] text-secondary-gray border-gray-tertiary/50 fixed top-0 left-0 z-20 flex h-full w-full flex-col items-start justify-center gap-8 border-r px-4 capitalize md:w-[30%] md:px-10",
+          "bg-[#3c3c3c] text-secondary-gray border-gray-tertiary/50 fixed top-0 left-0 z-20 flex h-full w-full flex-col items-start justify-center gap-8 border-r-[#202020] px-4 capitalize md:w-[30%] md:px-10",
           { hidden: !isOpen },
         )}
       >
@@ -129,7 +138,7 @@ export default function Header() {
           ))}
         </ul>
 
-        <div className="flex items-start justify-center gap-4">
+        <div className="flex items-start px-2 justify-center gap-4">
           {socialLinks.map(({ href, label, Icon: IconComp }) => (
             <a
               key={label}
