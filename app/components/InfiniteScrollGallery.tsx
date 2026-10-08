@@ -28,12 +28,18 @@ export default function InfiniteScrollGallery({
     const wrapper = wrapperRef.current;
     if (!container || !wrapper) return;
 
+    // Check if device is mobile/touch
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
     let scrollPosition = 0;
     let velocity = 0;
     const scrollSpeed = 0.1;
     const friction = 0.95;
     let cachedTotalWidth = 0;
     let rafId: number;
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let isDragging = false;
 
     // Cache dimensions once
     const cacheDimensions = () => {
@@ -47,6 +53,33 @@ export default function InfiniteScrollGallery({
     const handleWheel = (e: WheelEvent) => {
       e.preventDefault();
       velocity += e.deltaY * scrollSpeed;
+    };
+
+    const handleTouchStart = (e: TouchEvent) => {
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+      isDragging = true;
+      velocity = 0;
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+      if (!isDragging) return;
+
+      const touchX = e.touches[0].clientX;
+      const touchY = e.touches[0].clientY;
+      const deltaX = touchStartX - touchX;
+      const deltaY = Math.abs(touchStartY - touchY);
+
+      // Only handle horizontal scroll if the gesture is more horizontal than vertical
+      if (Math.abs(deltaX) > deltaY) {
+        e.preventDefault();
+        velocity = deltaX * 0.5;
+        touchStartX = touchX;
+      }
+    };
+
+    const handleTouchEnd = () => {
+      isDragging = false;
     };
 
     // RAF-based render loop with momentum and easing
@@ -76,12 +109,24 @@ export default function InfiniteScrollGallery({
 
     container.addEventListener("wheel", handleWheel, { passive: false });
 
+    // Add touch event listeners for mobile
+    if (isTouchDevice) {
+      container.addEventListener("touchstart", handleTouchStart, { passive: true });
+      container.addEventListener("touchmove", handleTouchMove, { passive: false });
+      container.addEventListener("touchend", handleTouchEnd, { passive: true });
+    }
+
     // Recalculate on resize
     const handleResize = () => cacheDimensions();
     window.addEventListener("resize", handleResize);
 
     return () => {
       container.removeEventListener("wheel", handleWheel);
+      if (isTouchDevice) {
+        container.removeEventListener("touchstart", handleTouchStart);
+        container.removeEventListener("touchmove", handleTouchMove);
+        container.removeEventListener("touchend", handleTouchEnd);
+      }
       window.removeEventListener("resize", handleResize);
       cancelAnimationFrame(rafId);
     };
@@ -91,7 +136,7 @@ export default function InfiniteScrollGallery({
 
   // Horizontal infinite scroll for both mobile and desktop
   return (
-    <div ref={containerRef} className="h-[calc(100vh-6rem)] md:h-[calc(100vh-5rem)] p-[.8rem] relative overflow-hidden">
+    <div ref={containerRef} className="h-[calc(100dvh-6rem)] md:h-[calc(100vh-5rem)] p-[.8rem] relative overflow-hidden">
       <div
         ref={wrapperRef}
         className="flex gap-[.8rem] h-full items-end"
