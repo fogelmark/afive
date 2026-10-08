@@ -159,48 +159,30 @@ export default function Header() {
         variants={drawerVariants}
         initial="closed"
         className={cn(
-          "bg-[#3c3c3c] text-offwhite fixed top-0 left-0 z-20 flex h-dvh w-screen flex-col justify-between py-6 px-4 capitalize overflow-y-auto md:h-screen md:w-[30%] md:px-10 md:justify-center md:overflow-hidden",
+          "bg-[#3c3c3c] text-offwhite fixed top-0 left-0 z-20 flex h-dvh w-screen flex-col justify-center py-6 px-4 capitalize overflow-y-auto md:h-screen md:w-[30%] md:px-10 md:overflow-hidden",
           { hidden: !isOpen },
         )}
       >
-        {/* ROW 1: Close button (mobile only) */}
-        <div className="md:hidden">
-          <motion.div
-            onClick={() => setIsOpen(false)}
-            className="flex cursor-pointer items-center gap-2"
-          >
-            <motion.div className="relative flex h-8 w-8 cursor-pointer items-center justify-center">
-              <motion.span
-                className="absolute top-1/2 left-1/2 h-px w-6 -translate-x-1/2 bg-offwhite"
-                style={{ rotate: 45, y: 0 }}
-              />
-              <motion.span
-                className="absolute top-1/2 left-1/2 h-px w-6 -translate-x-1/2 bg-offwhite"
-                style={{ rotate: -45, y: 0 }}
-              />
-            </motion.div>
-            <p className="uppercase text-sm text-offwhite">close</p>
-          </motion.div>
-        </div>
+        {/* Menu items + Social icons grouped (centered vertically) */}
+        <div className="flex flex-col gap-6 my-auto">
+          {/* Menu items (main navigation links) */}
+          <ul className={cn("flex flex-col justify-center gap-1")}>
+            {menuItems.map((item, index) => (
+              <motion.li key={index}>
+                <Link
+                  href={item.href}
+                  className="border-b-2 border-transparent focus:outline-none focus-visible:border-b-2 focus-visible:border-leon-yellow"
+                >
+                  <ButtonFlip className="text-5xl md:text-6xl capitalize leading-none px-1 tracking-tighter font-satoshi font-medium">
+                    {item.text}
+                  </ButtonFlip>
+                </Link>
+              </motion.li>
+            ))}
+          </ul>
 
-        {/* ROW 2: Menu items (main navigation links) */}
-        <ul className={cn("flex flex-col justify-center gap-1 md:my-auto")}>
-          {menuItems.map((item, index) => (
-            <motion.li key={index}>
-              <Link
-                href={item.href}
-                className="border-b-2 border-transparent focus:outline-none focus-visible:border-b-2 focus-visible:border-leon-yellow"
-              >
-                <ButtonFlip className="text-7xl md:text-7xl capitalize leading-none px-1 tracking-tighter font-satoshi font-medium">
-                  {item.text}
-                </ButtonFlip>
-              </Link>
-            </motion.li>
-          ))}
-        </ul>
-
-        {/* ROW 3: Social media icons */}
-        <div className="flex items-start px-2 justify-center gap-4">
+          {/* Social media icons */}
+          <div className="flex items-start px-2 justify-start gap-4">
           {socialLinks.map(({ href, label, Icon: IconComp }) => (
             <a
               key={label}
@@ -217,6 +199,7 @@ export default function Header() {
               />
             </a>
           ))}
+          </div>
         </div>
       </motion.aside>
 
