@@ -206,7 +206,7 @@ export default function Header() {
       {/* ============================================================ */}
       {/* LOGO (centered in header) */}
       {/* ============================================================ */}
-      <Link href="/" className="relative col-start-5 col-span-4 md:col-start-6 border-2 md:col-span-2">
+      <Link href="/" className="relative col-start-5 col-span-4 md:col-start-6 md:col-span-2">
         <ButtonFlip className="font-bespoke text-xl uppercase text-[#3c3c3c] font-bold">
           {"afive"}
         </ButtonFlip>

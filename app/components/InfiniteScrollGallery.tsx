@@ -4,6 +4,7 @@ import { useRef, useLayoutEffect, useState, useEffect } from "react";
 import Image, { StaticImageData } from "next/image";
 import { motion } from "framer-motion";
 import { TextFlip } from "./text-flip";
+import { usePreloaderAnimation } from "./Preloader";
 
 type MediaItem = StaticImageData | string;
 
@@ -22,6 +23,11 @@ export default function InfiniteScrollGallery({
   const [hoveredLabel, setHoveredLabel] = useState<string | null>(null);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [triggerFlip, setTriggerFlip] = useState<number | null>(null);
+  const shouldAnimate = usePreloaderAnimation();
+
+  useEffect(() => {
+    console.log('shouldAnimate:', shouldAnimate);
+  }, [shouldAnimate]);
 
   useLayoutEffect(() => {
     const container = containerRef.current;
@@ -147,6 +153,9 @@ export default function InfiniteScrollGallery({
           const label = pageLabels[index % pageLabels.length];
           const link = pageLinks[index % pageLinks.length];
 
+          const isOriginalCard = index < images.length;
+          const animationDelay = isOriginalCard ? (index * 0.1) : 0;
+
           return (
             <motion.a
               key={index}
@@ -160,7 +169,9 @@ export default function InfiniteScrollGallery({
                       ? ".8rem"
                       : "0rem",
               }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
+              transition={{
+                x: { duration: 0.6, ease: "easeOut" },
+              }}
               onMouseEnter={() => {
                 setHoveredLabel(label);
                 setHoveredIndex(index);
@@ -171,7 +182,26 @@ export default function InfiniteScrollGallery({
                 setHoveredIndex(null);
               }}
             >
-              <motion.div className="relative h-[66vh] overflow-hidden">
+              <motion.div className="relative h-[66vh] overflow-hidden" style={{ backfaceVisibility: 'hidden', padding: '.5px', margin: '-.5px' }}>
+                {/* Curtain overlay that reveals the image */}
+                {isOriginalCard && (
+                  <motion.div
+                    className="absolute -inset-0.5 z-10 bg-[#F1EEE9]"
+                    style={{
+                      backfaceVisibility: 'hidden',
+                      transform: 'translateZ(0)'
+                    }}
+                    initial={{ y: 0 }}
+                    animate={{
+                      y: shouldAnimate ? "-100%" : 0,
+                    }}
+                    transition={{
+                      duration: 2.6,
+                      delay: animationDelay,
+                      ease: [0.60, 0.50, 0.10, 1],
+                    }}
+                  />
+                )}
                 <motion.div
                   className="size-full relative"
                   whileHover={{ scale: 1.05 }}

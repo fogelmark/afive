@@ -1,62 +1,66 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, createContext, useContext } from "react";
+
+// Context to pass animation state to children
+const PreloaderContext = createContext(false);
+
+export const usePreloaderAnimation = () => useContext(PreloaderContext);
 
 export default function Preloader({ children }: { children: React.ReactNode }) {
-  const [lightBgHidden, setLightBgHidden] = useState(false);
-  const [curtainDone, setCurtainDone] = useState(false);
-  const [contentVisible, setContentVisible] = useState(false);
+  const [lightBgSliding, setLightBgSliding] = useState(false);
+  const [darkCurtainSliding, setDarkCurtainSliding] = useState(false);
+  const [contentSliding, setContentSliding] = useState(false);
+  const [cardsAnimating, setCardsAnimating] = useState(false);
 
   useEffect(() => {
-    // Hide light background (curtain starts sliding up)
-    const lightBgTimer = setTimeout(() => {
-      setLightBgHidden(true);
-    }, 500);
 
-    // Dark curtain slides off screen
-    const curtainTimer = setTimeout(() => {
-      setCurtainDone(true);
-    }, 1500);
+    // STEP 1: Dark curtain slides up (after light starts sliding)
+    const darkCurtainTimer = setTimeout(() => {
+      setDarkCurtainSliding(true);
+    }, 200);
 
-    // Landing page curtain slides up
+    // STEP 2: Landing page slides up (halfway through dark curtain)
     const contentTimer = setTimeout(() => {
-      setContentVisible(true);
-    }, 1700);
+      setContentSliding(true);
+    }, 600);
+
+    // STEP 3: Cards fade in when content page is 75% done (600ms + 75% of 1500ms = 1725ms)
+    const cardsTimer = setTimeout(() => {
+      setCardsAnimating(true);
+    }, 200);
 
     return () => {
-      clearTimeout(lightBgTimer);
-      clearTimeout(curtainTimer);
+      clearTimeout(darkCurtainTimer);
       clearTimeout(contentTimer);
+      clearTimeout(cardsTimer);
     };
   }, []);
 
   return (
     <>
-      {/* Light background (initial screen) */}
+
+      {/* LAYER 1: Dark curtain - starts below, slides up to COVER screen, then stays */}
       <div
-        className={`fixed inset-0 z-50 bg-[#F1EEE9] transition-transform duration-1000 ease-in-out ${
-          lightBgHidden ? "-translate-y-full" : "translate-y-0"
+        className={`fixed inset-0 z-30 bg-[#3c3c3c] transition-transform duration-1500 ${
+          darkCurtainSliding ? "translate-y-0" : "translate-y-full"
         }`}
-        style={{ transformOrigin: "bottom" }}
+        style={{ transitionTimingFunction: 'cubic-bezier(0.3, 0.30, 0.17, 1)' }}
       />
 
-      {/* Dark curtain */}
-      <div
-        className={`fixed inset-0 z-40 bg-[#3c3c3c] transition-transform duration-1000 ease-in-out ${
-          curtainDone ? "-translate-y-full" : "translate-y-0"
-        }`}
-        style={{ transformOrigin: "bottom" }}
-      />
-
-      {/* Content curtain */}
-      <div
-        className={`transition-transform duration-1000 ease-in-out ${
-          contentVisible ? "translate-y-0" : "translate-y-full"
-        }`}
-        style={{ transformOrigin: "bottom" }}
-      >
-        {children}
-      </div>
+      {/* LAYER 2: Landing page content - slides up from bottom to cover dark curtain */}
+      <PreloaderContext.Provider value={cardsAnimating}>
+        <div
+          className={`relative z-40 min-h-screen bg-[#F1EEE9] transition-transform duration-1500 will-change-transform ${
+            contentSliding ? "translate-y-0" : "translate-y-full"
+          }`}
+          style={{
+            transitionTimingFunction: 'cubic-bezier(0.3, 0.30, 0.17, 1)',
+          }}
+        >
+          {children}
+        </div>
+      </PreloaderContext.Provider>
     </>
   );
 }

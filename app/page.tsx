@@ -12,14 +12,14 @@ import PreloaderLogo from "./components/PreloaderLogo";
 
 export default function Home() {
   return (
-    <div className="md:h-screen">
-      {/* <Preloader> */}
+    <div className="md:h-screen bg-offwhite">
+      <Preloader>
         <Header />
         <CustomCursor />
         <InfiniteScrollGallery
           images={[krille, tjej, "/videos/leonheadergif.mp4", abbe, buildings]}
         />
-      {/* </Preloader> */}
+      </Preloader>
     </div>
   );
 }
