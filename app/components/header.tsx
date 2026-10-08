@@ -140,11 +140,11 @@ export default function Header() {
         variants={drawerVariants}
         initial="closed"
         className={cn(
-          "bg-[#3c3c3c] text-secondary-gray fixed top-0 left-0 z-20 flex h-dvh w-screen flex-col items-start justify-start pt-24 gap-6 border-r-[#202020] px-4 capitalize overflow-hidden md:h-screen md:w-[30%] md:px-10 md:justify-center md:pt-0",
+          "bg-[#3c3c3c] text-secondary-gray fixed top-0 left-0 z-20 flex h-dvh w-screen flex-col items-start justify-start pt-24 pb-12 gap-6 border-r-[#202020] px-4 capitalize overflow-y-auto md:h-screen md:w-[30%] md:px-10 md:justify-center md:pt-0 md:pb-0 md:overflow-hidden",
           { hidden: !isOpen },
         )}
       >
-        <ul className={cn("flex flex-col justify-center gap-1")}>
+        <ul className={cn("flex flex-col justify-center gap-1 flex-shrink-0")}>
           {menuItems.map((item, index) => (
             <motion.li key={index}>
               <Link
