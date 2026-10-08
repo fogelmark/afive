@@ -8,6 +8,10 @@ import { FaInstagram, FaSpotify, FaYoutube } from "react-icons/fa";
 import { SiApplemusic } from "react-icons/si";
 import Link from "next/link";
 
+// ============================================================================
+// ANIMATION VARIANTS
+// ============================================================================
+
 export const drawerVariants = {
   open: {
     opacity: 1,
@@ -23,6 +27,10 @@ export const drawerVariants = {
   },
 };
 
+// ============================================================================
+// MENU DATA
+// ============================================================================
+
 const menuItems = [
   { text: "label", href: "/label" },
   { text: "roster", href: "/roster" },
@@ -31,6 +39,7 @@ const menuItems = [
   { text: "contact", href: "/contact" },
 ];
 
+// Social media links
 const socialLinks = [
   {
     href: "/",
@@ -55,10 +64,14 @@ const socialLinks = [
   },
 ];
 
+// ============================================================================
+// HEADER COMPONENT
+// ============================================================================
+
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
 
-  // Prevent scroll when menu is open
+  // Prevent scroll when menu is open (body overflow + touch events)
   useEffect(() => {
     if (isOpen) {
       // Prevent body scroll
@@ -82,6 +95,9 @@ export default function Header() {
 
   return (
     <nav className="px-6 md:px-12 py-6 grid grid-cols-12 items-center justify-items-center w-full z-20">
+      {/* ============================================================ */}
+      {/* MENU TOGGLE BUTTON (visible on all screens, positioned in header) */}
+      {/* ============================================================ */}
       <motion.div
         className={cn(
           "relative z-40 flex w-fit font-satoshi font-medium justify-self-start col-start-1 col-span-2 gap-4 text-[#3c3c3c] max-sm:block",
@@ -133,6 +149,9 @@ export default function Header() {
         </motion.div>
       </motion.div>
 
+      {/* ============================================================ */}
+      {/* SIDE MENU (full screen on mobile, 30% width on desktop) */}
+      {/* ============================================================ */}
       <motion.aside
         role="presentation"
         onClick={(e) => e.stopPropagation()}
@@ -140,11 +159,32 @@ export default function Header() {
         variants={drawerVariants}
         initial="closed"
         className={cn(
-          "bg-[#3c3c3c] text-offwhite fixed top-0 left-0 z-20 flex min-h-dvh w-screen flex-col items-start justify-center gap-6 border-r-[#202020] px-4 capitalize overflow-y-auto md:h-screen md:w-[30%] md:px-10 md:overflow-hidden",
+          "bg-[#3c3c3c] text-offwhite fixed top-0 left-0 z-20 flex h-dvh w-screen flex-col justify-between py-6 px-4 capitalize overflow-y-auto md:h-screen md:w-[30%] md:px-10 md:justify-center md:overflow-hidden",
           { hidden: !isOpen },
         )}
       >
-        <ul className={cn("flex flex-col justify-center gap-1 shrink-0")}>
+        {/* ROW 1: Close button (mobile only) */}
+        <div className="md:hidden">
+          <motion.div
+            onClick={() => setIsOpen(false)}
+            className="flex cursor-pointer items-center gap-2"
+          >
+            <motion.div className="relative flex h-8 w-8 cursor-pointer items-center justify-center">
+              <motion.span
+                className="absolute top-1/2 left-1/2 h-px w-6 -translate-x-1/2 bg-offwhite"
+                style={{ rotate: 45, y: 0 }}
+              />
+              <motion.span
+                className="absolute top-1/2 left-1/2 h-px w-6 -translate-x-1/2 bg-offwhite"
+                style={{ rotate: -45, y: 0 }}
+              />
+            </motion.div>
+            <p className="uppercase text-sm text-offwhite">close</p>
+          </motion.div>
+        </div>
+
+        {/* ROW 2: Menu items (main navigation links) */}
+        <ul className={cn("flex flex-col justify-center gap-1 md:my-auto")}>
           {menuItems.map((item, index) => (
             <motion.li key={index}>
               <Link
@@ -159,6 +199,7 @@ export default function Header() {
           ))}
         </ul>
 
+        {/* ROW 3: Social media icons */}
         <div className="flex items-start px-2 justify-center gap-4">
           {socialLinks.map(({ href, label, Icon: IconComp }) => (
             <a
@@ -178,6 +219,10 @@ export default function Header() {
           ))}
         </div>
       </motion.aside>
+
+      {/* ============================================================ */}
+      {/* LOGO (centered in header) */}
+      {/* ============================================================ */}
       <Link href="/" className="relative col-start-5 col-span-4 md:col-start-6 border-2 md:col-span-2">
         <ButtonFlip className="font-bespoke text-xl uppercase text-[#3c3c3c] font-bold">
           {"afive"}
