@@ -151,7 +151,7 @@ export default function Header() {
                 href={item.href}
                 className="border-b-2 border-transparent focus:outline-none focus-visible:border-b-2 focus-visible:border-leon-yellow"
               >
-                <ButtonFlip className="text-7xl md:text-7xl capitalize leading-none px-1 tracking-tighter font-satoshi font-medium">
+                <ButtonFlip className="text-5xl md:text-6xl capitalize leading-none px-1 tracking-tighter font-satoshi font-medium">
                   {item.text}
                 </ButtonFlip>
               </Link>
