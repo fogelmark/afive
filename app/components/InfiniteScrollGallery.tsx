@@ -21,7 +21,9 @@ export default function InfiniteScrollGallery({
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [hoveredLabel, setHoveredLabel] = useState<string | null>(null);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(
+    typeof window !== "undefined" ? window.innerWidth < 768 : false
+  );
   const [triggerFlip, setTriggerFlip] = useState<number | null>(null);
 
   useEffect(() => {
@@ -104,7 +106,7 @@ export default function InfiniteScrollGallery({
   if (isMobile) {
     // Mobile: vertical scrollable grid
     return (
-      <div className="p-[.8rem] pb-[3.2rem] min-h-[calc(100vh-6rem)]">
+      <div className="p-[.8rem] pb-[3.2rem]">
         <div className="flex flex-col gap-[.8rem]">
           {displayImages.map((item, index) => {
             const isVideo = typeof item === "string" && item.endsWith(".mp4");
@@ -137,7 +139,7 @@ export default function InfiniteScrollGallery({
                   )}
                   {/* Mobile label overlay */}
                   <div className="absolute bottom-4 right-4">
-                    <h3 className="font-chillax text-4xl font-semibold text-[hsl(40,64%,50%)] lowercase drop-shadow-lg">
+                    <h3 className="font-satoshi text-4xl px-1 tracking-tighter font-medium text-offwhite capitalize">
                       {label}
                     </h3>
                   </div>

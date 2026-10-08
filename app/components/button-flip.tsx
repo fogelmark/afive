@@ -39,7 +39,7 @@ export const ButtonFlip = forwardRef<HTMLSpanElement, ButtonProps>(
             key={hoverCount + "-white"}
             className="text-secondary-gray relative inline-block"
             initial={{ y: 0 }}
-            animate={{ y: "-100%" }}
+            animate={{ y: hoverCount > 0 ? "-100%" : 0 }}
             transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1] }}
           >
             {children}
@@ -49,7 +49,7 @@ export const ButtonFlip = forwardRef<HTMLSpanElement, ButtonProps>(
             key={hoverCount + "-red"}
             className="text-tertiary-gray absolute top-0 left-0"
             initial={{ y: "115%" }}
-            animate={{ y: 0 }}
+            animate={{ y: hoverCount > 0 ? 0 : "115%" }}
             transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1] }}
           >
             {children}

@@ -9,7 +9,6 @@ import { useEffect, useRef } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
 import { cn } from "@/lib/utils";
 import Lenis from "lenis";
-import { ButtonPill } from "../components/button-pill";
 
 const roster = [
   {
@@ -73,7 +72,6 @@ export default function Roster() {
               <p className="leading-none px-1 tracking-tighter font-satoshi font-medium text-xl md:text-2xl text-[#F1EEE9] mt-3 mb-6">
                 {roster[0].role}
               </p>
-              {/* <ButtonPill className="ml-1">Read more</ButtonPill> */}
             </section>
             <motion.img
               style={{ y: y1 }}
@@ -91,14 +89,13 @@ export default function Roster() {
         <div className="relative h-screen w-full overflow-hidden p-0">
           <div className="relative flex size-full flex-col items-center justify-center overflow-hidden">
             <div className="absolute inset-0 z-10 bg-linear-to-b from-transparent to-black/60" />
-            <section className="absolute z-10 bottom-50 left-8 right-8">
+            <section className="absolute z-10 bottom-35 left-8 right-8">
               <h2 className="font-satoshi capitalize text-3xl md:text-9xl px-1 tracking-tighter font-medium text-[#F1EEE9] leading-none">
                 {roster[1].name}
               </h2>
               <p className="leading-none px-1 tracking-tighter font-satoshi font-medium text-xl md:text-2xl text-[#F1EEE9] mt-3 mb-6">
                 {roster[1].role}
               </p>
-              {/* <ButtonPill className="ml-1">Read more</ButtonPill> */}
             </section>
             <motion.img
               style={{ y: y2 }}

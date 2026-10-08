@@ -12,7 +12,7 @@ import PreloaderLogo from "./components/PreloaderLogo";
 
 export default function Home() {
   return (
-    <div className="max-h-screen">
+    <div className="md:h-screen md:overflow-hidden">
       {/* <PreloaderLogo> */}
         {/* <Preloader> */}
         <Header />

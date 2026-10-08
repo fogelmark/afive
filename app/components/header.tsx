@@ -119,18 +119,18 @@ export default function Header() {
         variants={drawerVariants}
         initial="closed"
         className={cn(
-          "bg-[#3c3c3c] text-secondary-gray border-gray-tertiary/50 fixed top-0 left-0 z-20 flex h-full w-full flex-col items-start justify-center gap-8 border-r-[#202020] px-4 capitalize md:w-[30%] md:px-10",
+          "bg-[#3c3c3c] text-secondary-gray fixed top-0 left-0 z-20 flex h-full w-full flex-col items-start justify-center gap-8 border-r-[#202020] px-4 capitalize md:w-[30%] md:px-10",
           { hidden: !isOpen },
         )}
       >
-        <ul className={cn("flex h-2/3 flex-col justify-center gap-2")}>
+        <ul className={cn("flex flex-col justify-center gap-2")}>
           {menuItems.map((item, index) => (
             <motion.li key={index}>
               <Link
                 href={item.href}
                 className="border-b-2 border-transparent focus:outline-none focus-visible:border-b-2 focus-visible:border-leon-yellow"
               >
-                <ButtonFlip className="md:text-7xl capitalize leading-none px-1 tracking-tighter font-satoshi font-medium text-5xl">
+                <ButtonFlip className="md:text-7xl capitalize leading-none px-1 tracking-tighter font-satoshi font-medium text-4xl">
                   {item.text}
                 </ButtonFlip>
               </Link>
