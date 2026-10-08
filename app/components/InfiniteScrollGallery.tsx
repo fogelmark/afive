@@ -21,26 +21,12 @@ export default function InfiniteScrollGallery({
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [hoveredLabel, setHoveredLabel] = useState<string | null>(null);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const [isMobile, setIsMobile] = useState(
-    typeof window !== "undefined" ? window.innerWidth < 768 : false
-  );
   const [triggerFlip, setTriggerFlip] = useState<number | null>(null);
-
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
 
   useLayoutEffect(() => {
     const container = containerRef.current;
     const wrapper = wrapperRef.current;
-    if (!container || !wrapper || isMobile) return;
+    if (!container || !wrapper) return;
 
     let scrollPosition = 0;
     let velocity = 0;
@@ -99,62 +85,13 @@ export default function InfiniteScrollGallery({
       window.removeEventListener("resize", handleResize);
       cancelAnimationFrame(rafId);
     };
-  }, [images.length, isMobile]);
+  }, [images.length]);
 
-  const displayImages = isMobile ? images : [...images, ...images, ...images];
+  const displayImages = [...images, ...images, ...images];
 
-  if (isMobile) {
-    // Mobile: vertical scrollable grid
-    return (
-      <div className="p-[.8rem] pb-[3.2rem]">
-        <div className="flex flex-col gap-[.8rem]">
-          {displayImages.map((item, index) => {
-            const isVideo = typeof item === "string" && item.endsWith(".mp4");
-            const label = pageLabels[index % pageLabels.length];
-            const link = pageLinks[index % pageLinks.length];
-
-            return (
-              <a key={index} href={link} className="w-full">
-                <div className="relative aspect-3/4 overflow-hidden">
-                  {isVideo ? (
-                    <video
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                      className="grayscale size-full object-cover"
-                    >
-                      <source src={item as string} type="video/mp4" />
-                    </video>
-                  ) : (
-                    <Image
-                      src={item as StaticImageData}
-                      alt={label}
-                      fill
-                      className="object-cover object-top size-full"
-                      sizes="(max-width: 768px) 100vw, 30vw"
-                      quality={95}
-                      priority={index === 0}
-                    />
-                  )}
-                  {/* Mobile label overlay */}
-                  <div className="absolute bottom-4 right-4">
-                    <h3 className="font-satoshi text-4xl px-1 tracking-tighter font-medium text-offwhite capitalize">
-                      {label}
-                    </h3>
-                  </div>
-                </div>
-              </a>
-            );
-          })}
-        </div>
-      </div>
-    );
-  }
-
-  // Desktop: horizontal infinite scroll
+  // Horizontal infinite scroll for both mobile and desktop
   return (
-    <div ref={containerRef} className="h-[calc(100vh-5rem)] p-[.8rem] relative">
+    <div ref={containerRef} className="h-[calc(100vh-6rem)] md:h-[calc(100vh-5rem)] p-[.8rem] relative overflow-hidden">
       <div
         ref={wrapperRef}
         className="flex gap-[.8rem] h-full items-end"
@@ -169,7 +106,7 @@ export default function InfiniteScrollGallery({
             <motion.a
               key={index}
               href={link}
-              className="shrink-0 relative w-full md:w-[calc(28.74vw-.8rem)]"
+              className="shrink-0 relative w-[75vw] md:w-[calc(28.74vw-.8rem)]"
               animate={{
                 x:
                   hoveredIndex !== null && index < hoveredIndex
@@ -211,13 +148,21 @@ export default function InfiniteScrollGallery({
                       alt=""
                       fill
                       className="object-cover object-top size-full"
-                      sizes="30vw"
+                      sizes="(max-width: 768px) 75vw, 30vw"
+                      quality={95}
                     />
                   )}
                 </motion.div>
-                {/* Desktop label overlay */}
+                {/* Label overlay - always visible on mobile, hover on desktop */}
+                <div className="absolute bottom-3 right-3 md:bottom-1 md:right-3 pointer-events-none">
+                  <h3 className="font-satoshi text-3xl md:text-4xl leading-none px-1 tracking-tighter font-medium text-offwhite capitalize drop-shadow-lg md:hidden">
+                    {label}
+                  </h3>
+                </div>
+
+                {/* Desktop-only hover label */}
                 <motion.div
-                  className="absolute bottom-1 right-3 pointer-events-none"
+                  className="hidden md:block absolute bottom-1 right-3 pointer-events-none"
                   initial={{ opacity: 0, y: 10 }}
                   animate={{
                     opacity: hoveredIndex === index ? 1 : 0,
