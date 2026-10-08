@@ -2,7 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import { motion } from "motion/react";
-import { useState, forwardRef } from "react";
+import { useState, useEffect, forwardRef } from "react";
 
 interface ButtonProps {
   children: string;
@@ -14,8 +14,18 @@ export const ButtonFlip = forwardRef<HTMLSpanElement, ButtonProps>(
   ({ children, className, onHover }, ref) => {
     const [hoverCount, setHoverCount] = useState(0);
     const [animating, setAnimating] = useState(false);
+    const [supportsHover, setSupportsHover] = useState(true);
+
+    useEffect(() => {
+      // Check if device supports hover
+      const hasHover = window.matchMedia('(hover: hover)').matches;
+      setSupportsHover(hasHover);
+    }, []);
 
     const handleHover = () => {
+      // Don't animate on touch devices
+      if (!supportsHover) return;
+
       if (animating) return;
       setAnimating(true);
       setHoverCount((prev) => prev + 1);

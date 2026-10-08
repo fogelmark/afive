@@ -66,7 +66,7 @@ export default function Roster() {
           <div className="relative flex size-full flex-col items-center justify-center overflow-hidden">
             <div className="absolute inset-0 z-10 bg-linear-to-b from-transparent to-black/60" />
             <section className="absolute z-10 bottom-50 left-8 right-8">
-              <h2 className="font-satoshi capitalize text-3xl md:text-9xl px-1 tracking-tighter font-medium text-[#F1EEE9] leading-none">
+              <h2 className="font-satoshi capitalize text-8xl md:text-9xl px-1 tracking-tighter font-medium text-[#F1EEE9] leading-none">
                 {roster[0].name}
               </h2>
               <p className="leading-none px-1 tracking-tighter font-satoshi font-medium text-xl md:text-2xl text-[#F1EEE9] mt-3 mb-6">
@@ -90,7 +90,7 @@ export default function Roster() {
           <div className="relative flex size-full flex-col items-center justify-center overflow-hidden">
             <div className="absolute inset-0 z-10 bg-linear-to-b from-transparent to-black/60" />
             <section className="absolute z-10 bottom-35 left-8 right-8">
-              <h2 className="font-satoshi capitalize text-3xl md:text-9xl px-1 tracking-tighter font-medium text-[#F1EEE9] leading-none">
+              <h2 className="font-satoshi capitalize text-7xl md:text-9xl px-1 tracking-tighter font-medium text-[#F1EEE9] leading-none">
                 {roster[1].name}
               </h2>
               <p className="leading-none px-1 tracking-tighter font-satoshi font-medium text-xl md:text-2xl text-[#F1EEE9] mt-3 mb-6">

@@ -1,13 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
 import { ButtonFlip } from "./button-flip";
 import { FaInstagram, FaSpotify, FaYoutube } from "react-icons/fa";
 import { SiApplemusic } from "react-icons/si";
 import Link from "next/link";
-import { TextFlip } from "./text-flip";
 
 export const drawerVariants = {
   open: {
@@ -58,6 +57,19 @@ const socialLinks = [
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
+
+  // Prevent body scroll when menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isOpen]);
 
   return (
     <nav className="px-6 md:px-12 py-6 grid grid-cols-12 items-center justify-items-center w-full z-20">
@@ -119,18 +131,18 @@ export default function Header() {
         variants={drawerVariants}
         initial="closed"
         className={cn(
-          "bg-[#3c3c3c] text-secondary-gray fixed top-0 left-0 z-20 flex h-full w-full flex-col items-start justify-center gap-8 border-r-[#202020] px-4 capitalize md:w-[30%] md:px-10",
+          "bg-[#3c3c3c] text-secondary-gray fixed top-0 left-0 z-20 flex h-full w-full flex-col items-start justify-start pt-24 gap-6 border-r-[#202020] px-4 capitalize md:w-[30%] md:px-10 md:justify-center md:pt-0",
           { hidden: !isOpen },
         )}
       >
-        <ul className={cn("flex flex-col justify-center gap-2")}>
+        <ul className={cn("flex flex-col justify-center gap-1")}>
           {menuItems.map((item, index) => (
             <motion.li key={index}>
               <Link
                 href={item.href}
                 className="border-b-2 border-transparent focus:outline-none focus-visible:border-b-2 focus-visible:border-leon-yellow"
               >
-                <ButtonFlip className="md:text-7xl capitalize leading-none px-1 tracking-tighter font-satoshi font-medium text-4xl">
+                <ButtonFlip className="text-7xl md:text-7xl capitalize leading-none px-1 tracking-tighter font-satoshi font-medium">
                   {item.text}
                 </ButtonFlip>
               </Link>

@@ -21,12 +21,12 @@ export default function InfiniteScrollGallery({
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [hoveredLabel, setHoveredLabel] = useState<string | null>(null);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const [isMobile, setIsMobile] = useState(
-    typeof window !== "undefined" ? window.innerWidth < 768 : false
-  );
+  const [isMobile, setIsMobile] = useState(false);
+  const [isClient, setIsClient] = useState(false);
   const [triggerFlip, setTriggerFlip] = useState<number | null>(null);
 
   useEffect(() => {
+    setIsClient(true);
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768);
     };
@@ -103,26 +103,37 @@ export default function InfiniteScrollGallery({
 
   const displayImages = isMobile ? images : [...images, ...images, ...images];
 
+  // Prevent hydration mismatch by waiting for client-side render
+  if (!isClient) {
+    return (
+      <div className="h-[calc(100vh-5rem)] p-[.8rem] relative">
+        <div className="flex gap-[.8rem] h-full items-end opacity-0">
+          Loading...
+        </div>
+      </div>
+    );
+  }
+
   if (isMobile) {
-    // Mobile: vertical scrollable grid
+    // Mobile: simple vertical stack, no fancy effects
     return (
       <div className="p-[.8rem] pb-[3.2rem]">
         <div className="flex flex-col gap-[.8rem]">
-          {displayImages.map((item, index) => {
+          {images.map((item, index) => {
             const isVideo = typeof item === "string" && item.endsWith(".mp4");
             const label = pageLabels[index % pageLabels.length];
             const link = pageLinks[index % pageLinks.length];
 
             return (
-              <a key={index} href={link} className="w-full">
-                <div className="relative aspect-3/4 overflow-hidden">
+              <a key={index} href={link} className="block w-full">
+                <div className="relative w-full aspect-3/4">
                   {isVideo ? (
                     <video
                       autoPlay
                       loop
                       muted
                       playsInline
-                      className="grayscale size-full object-cover"
+                      className="grayscale w-full h-full object-cover"
                     >
                       <source src={item as string} type="video/mp4" />
                     </video>
@@ -131,13 +142,12 @@ export default function InfiniteScrollGallery({
                       src={item as StaticImageData}
                       alt={label}
                       fill
-                      className="object-cover object-top size-full"
-                      sizes="(max-width: 768px) 100vw, 30vw"
+                      className="object-cover object-top"
+                      sizes="100vw"
                       quality={95}
                       priority={index === 0}
                     />
                   )}
-                  {/* Mobile label overlay */}
                   <div className="absolute bottom-4 right-4">
                     <h3 className="font-satoshi text-4xl px-1 tracking-tighter font-medium text-offwhite capitalize">
                       {label}
