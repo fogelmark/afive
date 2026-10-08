@@ -140,7 +140,7 @@ export default function Header() {
         variants={drawerVariants}
         initial="closed"
         className={cn(
-          "bg-[#3c3c3c] text-secondary-gray fixed top-0 left-0 z-20 flex h-dvh w-screen flex-col items-start justify-start pt-24 pb-12 gap-6 border-r-[#202020] px-4 capitalize overflow-y-auto md:h-screen md:w-[30%] md:px-10 md:justify-center md:pt-0 md:pb-0 md:overflow-hidden",
+          "bg-[#3c3c3c] text-secondary-gray fixed top-0 left-0 z-20 flex h-dvh w-screen flex-col items-start justify-center gap-6 border-r-[#202020] px-4 capitalize overflow-y-auto md:h-screen md:w-[30%] md:px-10 md:overflow-hidden",
           { hidden: !isOpen },
         )}
       >
@@ -151,7 +151,7 @@ export default function Header() {
                 href={item.href}
                 className="border-b-2 border-transparent focus:outline-none focus-visible:border-b-2 focus-visible:border-leon-yellow"
               >
-                <ButtonFlip className="text-5xl md:text-6xl capitalize leading-none px-1 tracking-tighter font-satoshi font-medium">
+                <ButtonFlip className="text-6xl md:text-6xl capitalize leading-none px-1 tracking-tighter font-satoshi font-medium">
                   {item.text}
                 </ButtonFlip>
               </Link>
