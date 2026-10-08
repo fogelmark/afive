@@ -125,7 +125,7 @@ export default function Header() {
           </motion.div>
           <p
             className={cn("uppercase text-sm", {
-              "text-[#F1EEE9]": isOpen,
+              "text-offwhite": isOpen,
             })}
           >
             {isOpen ? "close" : "menu"}
@@ -140,18 +140,18 @@ export default function Header() {
         variants={drawerVariants}
         initial="closed"
         className={cn(
-          "bg-[#3c3c3c] text-secondary-gray fixed top-0 left-0 z-20 flex h-dvh w-screen flex-col items-start justify-center gap-6 border-r-[#202020] px-4 capitalize overflow-y-auto md:h-screen md:w-[30%] md:px-10 md:overflow-hidden",
+          "bg-[#3c3c3c] text-offwhite fixed top-0 left-0 z-20 flex min-h-dvh w-screen flex-col items-start justify-center gap-6 border-r-[#202020] px-4 capitalize overflow-y-auto md:h-screen md:w-[30%] md:px-10 md:overflow-hidden",
           { hidden: !isOpen },
         )}
       >
-        <ul className={cn("flex flex-col justify-center gap-1 flex-shrink-0")}>
+        <ul className={cn("flex flex-col justify-center gap-1 shrink-0")}>
           {menuItems.map((item, index) => (
             <motion.li key={index}>
               <Link
                 href={item.href}
                 className="border-b-2 border-transparent focus:outline-none focus-visible:border-b-2 focus-visible:border-leon-yellow"
               >
-                <ButtonFlip className="text-6xl md:text-6xl capitalize leading-none px-1 tracking-tighter font-satoshi font-medium">
+                <ButtonFlip className="text-7xl md:text-7xl capitalize leading-none px-1 tracking-tighter font-satoshi font-medium">
                   {item.text}
                 </ButtonFlip>
               </Link>
@@ -178,7 +178,7 @@ export default function Header() {
           ))}
         </div>
       </motion.aside>
-      <Link href="/" className="relative w-24 col-start-7 md:col-start-6 col-span-2">
+      <Link href="/" className="relative col-start-5 col-span-4 md:col-start-6 border-2 md:col-span-2">
         <ButtonFlip className="font-bespoke text-xl uppercase text-[#3c3c3c] font-bold">
           {"afive"}
         </ButtonFlip>
