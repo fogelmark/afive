@@ -42,7 +42,7 @@ export default function Preloader({ children }: { children: React.ReactNode }) {
 
       {/* LAYER 1: Dark curtain - starts below, slides up to COVER screen, then stays */}
       <div
-        className={`fixed inset-0 z-30 bg-[#3c3c3c] transition-transform duration-1500 ${
+        className={`fixed inset-0 z-30 bg-[#3c3c3c] transition-transform duration-1500 h-dvh ${
           darkCurtainSliding ? "translate-y-0" : "translate-y-full"
         }`}
         style={{ transitionTimingFunction: 'cubic-bezier(0.3, 0.30, 0.17, 1)' }}
