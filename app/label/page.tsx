@@ -2,7 +2,7 @@
 
 import { motion } from "motion/react";
 import { useEffect } from "react";
-import CustomCursor from "../components/CustomCursor";
+import CustomCursor from "../components/custom-cursor";
 import Header from "../components/header";
 import Lenis from "lenis";
 

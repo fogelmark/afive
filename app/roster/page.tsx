@@ -1,7 +1,7 @@
 "use client";
 
 import Header from "../components/header";
-import CustomCursor from "../components/CustomCursor";
+import CustomCursor from "../components/custom-cursor";
 import Image from "next/image";
 import alicia from "@/public/images/alicia_grain.jpg";
 import hanna from "@/public/images/hanna_grain.jpg";

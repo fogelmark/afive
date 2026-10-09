@@ -1,7 +1,7 @@
 "use client";
 
 import Header from "../components/header";
-import CustomCursor from "../components/CustomCursor";
+import CustomCursor from "../components/custom-cursor";
 import Lenis from "lenis";
 import { useEffect } from "react";
 

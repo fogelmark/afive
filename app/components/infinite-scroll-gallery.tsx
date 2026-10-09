@@ -4,7 +4,7 @@ import { useRef, useLayoutEffect, useState, useEffect } from "react";
 import Image, { StaticImageData } from "next/image";
 import { motion } from "framer-motion";
 import { TextFlip } from "./text-flip";
-import { usePreloaderAnimation } from "./Preloader";
+import { usePreloaderAnimation } from "./preloader";
 
 type MediaItem = StaticImageData | string;
 

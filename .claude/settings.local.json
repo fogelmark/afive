@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git mv app/components/CustomCursor.tsx app/components/custom-cursor.tsx)",
+      "Bash(git mv app/components/PreloaderLogo.tsx app/components/preloader-logo.tsx)",
+      "Bash(git mv app/components/InfiniteScrollGallery.tsx app/components/infinite-scroll-gallery.tsx)",
+      "Bash(git mv app/components/Preloader.tsx app/components/preloader.tsx)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
