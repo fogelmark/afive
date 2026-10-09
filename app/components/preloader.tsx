@@ -11,6 +11,7 @@ export default function Preloader({ children }: { children: React.ReactNode }) {
   const [darkCurtainSliding, setDarkCurtainSliding] = useState(false);
   const [contentSliding, setContentSliding] = useState(false);
   const [cardsAnimating, setCardsAnimating] = useState(false);
+  const [hideCurtain, setHideCurtain] = useState(false);
 
   useEffect(() => {
 
@@ -29,28 +30,36 @@ export default function Preloader({ children }: { children: React.ReactNode }) {
       setCardsAnimating(true);
     }, 200);
 
+    // STEP 4: Remove curtain after animation completes
+    const removeCurtainTimer = setTimeout(() => {
+      setHideCurtain(true);
+    }, 2100); // 600ms + 1500ms duration
+
     return () => {
       clearTimeout(darkCurtainTimer);
       clearTimeout(contentTimer);
       clearTimeout(cardsTimer);
+      clearTimeout(removeCurtainTimer);
     };
   }, []);
 
   return (
     <>
 
-      {/* LAYER 1: Dark curtain - starts below, slides up to COVER screen, then stays */}
-      <div
-        className={`fixed inset-0 z-30 bg-[#3c3c3c] transition-transform duration-1500 h-dvh ${
-          darkCurtainSliding ? "translate-y-0" : "translate-y-full"
-        }`}
-        style={{ transitionTimingFunction: 'cubic-bezier(0.3, 0.30, 0.17, 1)' }}
-      />
+      {/* LAYER 1: Dark curtain - starts below, slides up to COVER screen, then removed */}
+      {!hideCurtain && (
+        <div
+          className={`fixed inset-0 z-30 bg-[#3c3c3c] transition-transform duration-1500 h-dvh ${
+            darkCurtainSliding ? "translate-y-0" : "translate-y-full"
+          }`}
+          style={{ transitionTimingFunction: 'cubic-bezier(0.3, 0.30, 0.17, 1)' }}
+        />
+      )}
 
       {/* LAYER 2: Landing page content - slides up from bottom to cover dark curtain */}
       <PreloaderContext.Provider value={cardsAnimating}>
         <div
-          className={`relative z-40 min-h-screen bg-[#F1EEE9] transition-transform duration-1500 will-change-transform ${
+          className={`relative z-40 h-dvh bg-[#F1EEE9] transition-transform duration-1500 will-change-transform overflow-hidden ${
             contentSliding ? "translate-y-0" : "translate-y-full"
           }`}
           style={{
