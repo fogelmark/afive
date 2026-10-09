@@ -73,12 +73,17 @@ export default function Roster() {
                 {roster[0].role}
               </p>
             </section>
-            <motion.img
-              style={{ y: y1 }}
-              className="size-full scale-105 object-center object-cover"
-              src={alicia.src}
-              alt={roster[0].name}
-            />
+            <motion.div style={{ y: y1 }} className="size-full scale-105">
+              <Image
+                src={alicia}
+                alt={roster[0].name}
+                fill
+                className="object-center object-cover"
+                sizes="100vw"
+                quality={85}
+                priority
+              />
+            </motion.div>
           </div>
         </div>
       </div>
@@ -97,12 +102,16 @@ export default function Roster() {
                 {roster[1].role}
               </p>
             </section>
-            <motion.img
-              style={{ y: y2 }}
-              className="size-full scale-105 object-top object-cover"
-              src={hanna.src}
-              alt={roster[1].name}
-            />
+            <motion.div style={{ y: y2 }} className="size-full scale-105">
+              <Image
+                src={hanna}
+                alt={roster[1].name}
+                fill
+                className="object-top object-cover"
+                sizes="100vw"
+                quality={85}
+              />
+            </motion.div>
           </div>
         </div>
       </div>

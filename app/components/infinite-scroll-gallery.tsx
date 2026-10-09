@@ -3,7 +3,6 @@
 import { useRef, useLayoutEffect, useState, useEffect } from "react";
 import Image, { StaticImageData } from "next/image";
 import { motion } from "framer-motion";
-import { TextFlip } from "./text-flip";
 import { usePreloaderAnimation } from "./preloader";
 
 type MediaItem = StaticImageData | string;
@@ -213,6 +212,7 @@ export default function InfiniteScrollGallery({
                       loop
                       muted
                       playsInline
+                      preload="metadata"
                       className="grayscale size-full object-cover"
                     >
                       <source src={item as string} type="video/mp4" />
@@ -224,7 +224,9 @@ export default function InfiniteScrollGallery({
                       fill
                       className="object-cover object-top size-full"
                       sizes="(max-width: 768px) 75vw, 30vw"
-                      quality={95}
+                      quality={85}
+                      loading={index >= images.length ? "lazy" : "eager"}
+                      priority={index < 2}
                     />
                   )}
                 </motion.div>

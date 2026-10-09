@@ -8,7 +8,6 @@ const PreloaderContext = createContext(false);
 export const usePreloaderAnimation = () => useContext(PreloaderContext);
 
 export default function Preloader({ children }: { children: React.ReactNode }) {
-  const [lightBgSliding, setLightBgSliding] = useState(false);
   const [darkCurtainSliding, setDarkCurtainSliding] = useState(false);
   const [contentSliding, setContentSliding] = useState(false);
   const [cardsAnimating, setCardsAnimating] = useState(false);
