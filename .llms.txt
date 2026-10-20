@@ -1,0 +1,29 @@
+# Afive Music Publishing
+
+> Stockholm-based music publishing company representing songwriters and composers.
+
+## About
+
+Afive Music Publishing is a modern music publishing company dedicated to representing talented songwriters and composers. We manage music catalogs, handle royalty collection, and provide sync licensing opportunities for film, TV, advertising, and other media.
+
+## Services
+
+- **Music Publishing**: Comprehensive rights management and royalty collection
+- **Sync Licensing**: Placement opportunities in film, TV, advertising, and games
+- **Catalog Management**: Professional administration of musical works
+- **Creative Support**: Resources and guidance for songwriters and composers
+
+## Technology Stack
+
+- **Framework**: Next.js 16.3.6 (React 19.2.4)
+- **Styling**: Tailwind CSS 4
+- **Animations**: GSAP, Motion, Lenis
+- **Fonts**: Custom fonts including Chillax, Satoshi, General Sans, Bespoke Serif, New Title
+
+## Contact
+
+Website: https://afivepublishing.com
+
+---
+
+*This file provides context for LLM crawlers and AI assistants about Afive Music Publishing.*
