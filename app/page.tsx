@@ -2,7 +2,7 @@
 
 import krille from "@/public/images/krille.jpg";
 import abbe from "@/public/images/abbe.jpg";
-import tjej from "@/public/images/tjej.jpg";
+import roster from "@/public/images/roster.jpg"
 import buildings from "@/public/images/buildings.jpg";
 import InfiniteScrollGallery from "@/app/components/infinite-scroll-gallery";
 import CustomCursor from "./components/custom-cursor";
@@ -17,7 +17,7 @@ export default function Home() {
         <Header />
         <CustomCursor />
         <InfiniteScrollGallery
-          images={[krille, tjej, "/videos/leonheadergif.mp4", abbe, buildings]}
+          images={[krille, abbe, "/videos/leonheadergif.mp4", roster, buildings]}
         />
       </Preloader>
     </div>
