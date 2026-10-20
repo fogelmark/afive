@@ -12,13 +12,13 @@ import "./globals.css";
 import Header from "./components/header";
 
 export const metadata: Metadata = {
-  title: "afive Music Publishing",
+  title: "Afive Music Publishing",
   description:
     "Stockholm-based music publishing company representing songwriters and composers.",
   keywords: ["music publishing", "songwriters", "composers", "music catalog", "royalties", "sync licensing"],
-  authors: [{ name: "afive Music Publishing" }],
-  creator: "afive Music Publishing",
-  publisher: "afive Music Publishing",
+  authors: [{ name: "Afive Music Publishing" }],
+  creator: "Afive Music Publishing",
+  publisher: "Afive Music Publishing",
   robots: {
     index: true,
     follow: true,
@@ -34,8 +34,8 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_EU",
     url: "https://afivepublishing.com",
-    siteName: "afive Music Publishing",
-    title: "afive Music Publishing",
+    siteName: "Afive Music Publishing",
+    title: "Afive Music Publishing",
     description:
       "Stockholm-based music publishing company representing songwriters and composers.",
     images: [
@@ -43,13 +43,13 @@ export const metadata: Metadata = {
         url: "/logos/afive-fi-stepped-dark.png",
         width: 1200,
         height: 630,
-        alt: "afive Music Publishing",
+        alt: "Afive Music Publishing",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "afive Music Publishing",
+    title: "Afive Music Publishing",
     description:
       "Stockholm-based music publishing company representing songwriters and composers.",
     images: ["/logos/afive-fi-stepped-dark.png"],
