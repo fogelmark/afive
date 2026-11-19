@@ -27,7 +27,7 @@
   --font-anton: "Anton", sans-serif;
   --font-bespoke: "BespokeSerif", serif;
   --font-new-title: "NewTitle", sans-serif;
-  --color-offwhite: "#F1EEE9";
+  --color-offwhite: #F1EEE9;
 }
 
 html {
