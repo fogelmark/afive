@@ -25,7 +25,7 @@ export default function InfiniteScrollGallery({
   const shouldAnimate = usePreloaderAnimation();
 
   useEffect(() => {
-    console.log('shouldAnimate:', shouldAnimate);
+    console.log("shouldAnimate:", shouldAnimate);
   }, [shouldAnimate]);
 
   useLayoutEffect(() => {
@@ -34,7 +34,8 @@ export default function InfiniteScrollGallery({
     if (!container || !wrapper) return;
 
     // Check if device is mobile/touch
-    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    const isTouchDevice =
+      "ontouchstart" in window || navigator.maxTouchPoints > 0;
 
     let scrollPosition = 0;
     let velocity = 0;
@@ -116,8 +117,12 @@ export default function InfiniteScrollGallery({
 
     // Add touch event listeners for mobile
     if (isTouchDevice) {
-      container.addEventListener("touchstart", handleTouchStart, { passive: true });
-      container.addEventListener("touchmove", handleTouchMove, { passive: false });
+      container.addEventListener("touchstart", handleTouchStart, {
+        passive: true,
+      });
+      container.addEventListener("touchmove", handleTouchMove, {
+        passive: false,
+      });
       container.addEventListener("touchend", handleTouchEnd, { passive: true });
     }
 
@@ -141,7 +146,10 @@ export default function InfiniteScrollGallery({
 
   // Horizontal infinite scroll for both mobile and desktop
   return (
-    <div ref={containerRef} className="h-[calc(100dvh-6rem)] md:h-[calc(100vh-5rem)] p-[.8rem] relative overflow-hidden">
+    <div
+      ref={containerRef}
+      className="h-[calc(100dvh-6rem)] md:h-[calc(100vh-5rem)] p-[.8rem] relative overflow-hidden"
+    >
       <div
         ref={wrapperRef}
         className="flex gap-[.8rem] h-full items-end"
@@ -153,7 +161,7 @@ export default function InfiniteScrollGallery({
           const link = pageLinks[index % pageLinks.length];
 
           const isOriginalCard = index < images.length;
-          const animationDelay = isOriginalCard ? (index * 0.1) : 0;
+          const animationDelay = isOriginalCard ? index * 0.1 : 0;
 
           return (
             <motion.a
@@ -181,14 +189,21 @@ export default function InfiniteScrollGallery({
                 setHoveredIndex(null);
               }}
             >
-              <motion.div className="relative h-[66vh] overflow-hidden" style={{ backfaceVisibility: 'hidden', padding: '.5px', margin: '-.5px' }}>
+              <motion.div
+                className="relative h-[66vh] overflow-hidden"
+                style={{
+                  backfaceVisibility: "hidden",
+                  padding: ".5px",
+                  margin: "-.5px",
+                }}
+              >
                 {/* Curtain overlay that reveals the image */}
                 {isOriginalCard && (
                   <motion.div
                     className="absolute -inset-0.5 z-10 bg-[#F1EEE9]"
                     style={{
-                      backfaceVisibility: 'hidden',
-                      transform: 'translateZ(0)'
+                      backfaceVisibility: "hidden",
+                      transform: "translateZ(0)",
                     }}
                     initial={{ y: 0 }}
                     animate={{
@@ -197,7 +212,7 @@ export default function InfiniteScrollGallery({
                     transition={{
                       duration: 2.6,
                       delay: animationDelay,
-                      ease: [0.60, 0.50, 0.10, 1],
+                      ease: [0.6, 0.5, 0.1, 1],
                     }}
                   />
                 )}
@@ -238,20 +253,11 @@ export default function InfiniteScrollGallery({
                 </div>
 
                 {/* Desktop-only hover label */}
-                <motion.div
-                  className="hidden md:block absolute bottom-1 right-3 pointer-events-none"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{
-                    opacity: hoveredIndex === index ? 1 : 0,
-                    y: hoveredIndex === index ? 0 : 10,
-                    filter: hoveredIndex === index ? "blur(0px)" : "blur(4px)",
-                  }}
-                  transition={{ duration: 0.3, ease: "easeOut" }}
-                >
+                <div className="md:block hidden absolute bottom-1 right-3 pointer-events-none">
                   <h3 className="font-satoshi text-4xl leading-none px-1 tracking-tighter font-medium text-offwhite capitalize drop-shadow-lg">
                     {label}
                   </h3>
-                </motion.div>
+                </div>
               </motion.div>
             </motion.a>
           );
