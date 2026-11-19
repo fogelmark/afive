@@ -72,11 +72,6 @@ export default function Info() {
                   generation of Swedish songwriters through mentorship, studio
                   sessions, writing camps and industry connections.
                 </p>
-
-                <p className="opacity-90">
-                  AFIVE is also expanding into mood music through a new
-                  collaboration with Orbit, an initiative currently in development.
-                </p>
               </div>
             </motion.div>
 
